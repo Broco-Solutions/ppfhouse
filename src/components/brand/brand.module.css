@@ -1,0 +1,19 @@
+.asset {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.logo {
+  min-width: 6.875rem;
+}
+
+.lockup {
+  min-width: 10rem;
+}
+
+.mark {
+  min-width: 1.25rem;
+}

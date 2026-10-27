@@ -1,0 +1,8 @@
+.next
+coverage
+docs/FERRARO_MASTER_PLAN.md
+node_modules
+playwright-report
+pnpm-lock.yaml
+src/generated
+test-results

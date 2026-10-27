@@ -1,0 +1,64 @@
+.page {
+  display: grid;
+  gap: var(--space-7);
+}
+.groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-7);
+}
+.group {
+  min-width: 0;
+}
+.group h2 {
+  margin: 0 0 var(--space-3);
+  padding-bottom: var(--space-3);
+  font-size: var(--text-lg);
+  border-bottom: 1px solid var(--border-strong);
+}
+.group a {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-3) 0;
+  color: var(--foreground);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+}
+.group a:hover strong {
+  text-decoration: underline;
+  text-decoration-color: var(--brand-yellow);
+  text-decoration-thickness: 0.15rem;
+  text-underline-offset: 0.2rem;
+}
+.group small {
+  color: var(--foreground-muted);
+}
+.adminList {
+  display: grid;
+  border-top: 1px solid var(--border-strong);
+}
+.adminRow {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr) auto;
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--border);
+}
+.adminRow svg {
+  color: var(--foreground-muted);
+}
+.adminRow div {
+  display: grid;
+  gap: var(--space-1);
+}
+.adminRow p {
+  margin: 0;
+  color: var(--foreground-muted);
+}
+@media (max-width: 48rem) {
+  .groups {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+}

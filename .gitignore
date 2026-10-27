@@ -1,0 +1,45 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# Next.js
+.next/
+next-env.d.ts
+out/
+
+# environment
+.env
+.env.local
+.env.*.local
+
+# logs
+*.log
+*.tsbuildinfo
+npm-debug.log*
+pnpm-debug.log*
+
+# tests / coverage
+coverage/
+playwright-report/
+test-results/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# local tooling
+.vercel/
+.turbo/
+.prisma/
+.data/
+
+# generated database client
+src/generated/prisma/
+
+# local AI tooling
+.agents/
+.claude/
+.windsurf/
+skills-lock.json

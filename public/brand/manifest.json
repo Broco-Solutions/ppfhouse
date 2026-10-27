@@ -1,0 +1,49 @@
+{
+  "source": {
+    "path": "docs/brand/source/FERRARO_manual_marca.pdf",
+    "sha256": "efe1227d30607fc00f90dc8c5fa9374eeabcb0b23951ae68b9afd516aad97251",
+    "pages": 5,
+    "provenance": "Adobe Illustrator vector PDF supplied by Ferraro",
+    "license": "Ferraro proprietary brand asset; authorized for Ferraro Manager"
+  },
+  "colors": {
+    "black": "#000000",
+    "gray": "#706F6F",
+    "yellow": "#FFCE13",
+    "white": "#FFFFFF"
+  },
+  "assets": {
+    "lockupDetailBlack": {
+      "path": "/brand/ferraro-lockup-detail-black.svg",
+      "sha256": "5de10e9ab3843e25523c62836788355620857eca2baf74f937eb9e4c8fa46038"
+    },
+    "lockupDetailTricolor": {
+      "path": "/brand/ferraro-lockup-detail-tricolor.svg",
+      "sha256": "bef3359fd773675e91e04a6ed096fc66ae00b8348435a81238141e5b7bd2cccd"
+    },
+    "logoBlack": {
+      "path": "/brand/ferraro-logo-black.svg",
+      "sha256": "b26e18ba9a12c34cb39c571a7982c22b36d82e8ade8a73dd6b8b864c902d9788"
+    },
+    "logoTricolor": {
+      "path": "/brand/ferraro-logo-tricolor.svg",
+      "sha256": "c9f2295e1e28e7ce873f1f4f0521ef0febcca5c3e3dd4d17a1f29492f9980dba"
+    },
+    "logoWhite": {
+      "path": "/brand/ferraro-logo-white.svg",
+      "sha256": "dc66a39f38008f678beec6338cf045c528deb3d603ecbaa426a6bb0691a2598c"
+    },
+    "logoOutline": {
+      "path": "/brand/ferraro-logo-outline.svg",
+      "sha256": "d8cb50763e78c3935cf3c32077f22b52366dc715578ec4c70727206d9c4a470d"
+    },
+    "markOutline": {
+      "path": "/brand/ferraro-mark-outline.svg",
+      "sha256": "fc539009f0da7c21eaa0c292a8dfacfab89c5103df007a97a96212e03cb3ef0c"
+    },
+    "markTricolor": {
+      "path": "/brand/ferraro-mark-tricolor.svg",
+      "sha256": "f4e20b5ed3631658a371c10f26640e3b40ef4dde712960bc9eaffab34260afa0"
+    }
+  }
+}

@@ -1,0 +1,1005 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  ADMIN
+  STAFF
+}
+
+enum SourceCurrency {
+  USD
+  ARS
+}
+
+enum VehicleClass {
+  SEDAN
+  SUV
+  PICKUP
+  OTHER
+}
+
+enum ServiceVariantType {
+  VEHICLE_CLASS
+  MODEL_EXCEPTION
+}
+
+enum ServiceCaseOrigin {
+  DIRECT_APPOINTMENT
+  DIRECT_JOB
+  ACCEPTED_QUOTE
+}
+
+enum AppointmentStatus {
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+enum QuoteStatus {
+  DRAFT
+  SENT
+  ACCEPTED
+  REJECTED
+}
+
+enum FinancialDirection {
+  INFLOW
+  OUTFLOW
+}
+
+enum FinancialEntryType {
+  CUSTOMER_PAYMENT
+  CUSTOMER_REFUND
+  PURCHASE
+  MANUAL_INCOME
+  MANUAL_EXPENSE
+  SALARY_PAYMENT
+  REVERSAL
+}
+
+enum PaymentMethod {
+  TRANSFER
+  CASH
+  OTHER
+}
+
+enum InventoryMovementType {
+  PURCHASE
+  CONSUMPTION
+  ADJUSTMENT_IN
+  ADJUSTMENT_OUT
+  RETURN
+  REVERSAL
+}
+
+enum PurchaseStatus {
+  POSTED
+  VOIDED
+}
+
+enum PhotoStage {
+  BEFORE
+  PROCESS
+  AFTER
+}
+
+enum SalaryMonthStatus {
+  PENDING
+  PAID
+  CANCELLED
+}
+
+model User {
+  id                          String                      @id @default(uuid()) @db.Uuid
+  name                        String
+  email                       String                      @unique
+  emailVerified               Boolean                     @default(false)
+  image                       String?
+  role                        UserRole                    @default(STAFF)
+  active                      Boolean                     @default(true)
+  lastLoginAt                 DateTime?
+  createdAt                   DateTime                    @default(now())
+  updatedAt                   DateTime                    @updatedAt
+  salariesCreated             Salary[]
+  salaryEvents                SalaryEvent[]
+  sessions                    Session[]
+  accounts                    Account[]
+  idempotency                 IdempotencyKey[]
+  clientsCreated              Client[]                    @relation("ClientCreatedBy")
+  clientsUpdated              Client[]                    @relation("ClientUpdatedBy")
+  vehiclesCreated             Vehicle[]                   @relation("VehicleCreatedBy")
+  vehiclesUpdated             Vehicle[]                   @relation("VehicleUpdatedBy")
+  serviceCategoriesCreated    ServiceCategory[]           @relation("ServiceCategoryCreatedBy")
+  serviceCategoriesUpdated    ServiceCategory[]           @relation("ServiceCategoryUpdatedBy")
+  servicesCreated             Service[]                   @relation("ServiceCreatedBy")
+  servicesUpdated             Service[]                   @relation("ServiceUpdatedBy")
+  serviceVariantsCreated      ServiceVariant[]            @relation("ServiceVariantCreatedBy")
+  serviceVariantsUpdated      ServiceVariant[]            @relation("ServiceVariantUpdatedBy")
+  serviceCasesCreated         ServiceCase[]               @relation("ServiceCaseCreatedBy")
+  appointmentsCreated         Appointment[]               @relation("AppointmentCreatedBy")
+  appointmentsUpdated         Appointment[]               @relation("AppointmentUpdatedBy")
+  appointmentAssignments      AppointmentEmployee[]
+  calendarBlocksCreated       CalendarBlock[]             @relation("CalendarBlockCreatedBy")
+  calendarBlocksUpdated       CalendarBlock[]             @relation("CalendarBlockUpdatedBy")
+  jobsCreated                 Job[]                       @relation("JobCreatedBy")
+  jobsUpdated                 Job[]                       @relation("JobUpdatedBy")
+  jobAssignments              JobEmployee[]
+  quotesCreated               Quote[]                     @relation("QuoteCreatedBy")
+  quotesUpdated               Quote[]                     @relation("QuoteUpdatedBy")
+  financialCategoriesCreated  FinancialCategory[]         @relation("FinancialCategoryCreatedBy")
+  financialCategoriesUpdated  FinancialCategory[]         @relation("FinancialCategoryUpdatedBy")
+  financialEntriesCreated     FinancialEntry[]            @relation("FinancialEntryCreatedBy")
+  amountRevisionsCreated      ServiceCaseAmountRevision[] @relation("AmountRevisionCreatedBy")
+  inventoryCategoriesCreated  InventoryCategory[]         @relation("InventoryCategoryCreatedBy")
+  inventoryCategoriesUpdated  InventoryCategory[]         @relation("InventoryCategoryUpdatedBy")
+  inventoryItemsCreated       InventoryItem[]             @relation("InventoryItemCreatedBy")
+  inventoryItemsUpdated       InventoryItem[]             @relation("InventoryItemUpdatedBy")
+  inventoryMovementsCreated   InventoryMovement[]         @relation("InventoryMovementCreatedBy")
+  suppliersCreated            Supplier[]                  @relation("SupplierCreatedBy")
+  suppliersUpdated            Supplier[]                  @relation("SupplierUpdatedBy")
+  purchasesCreated            Purchase[]                  @relation("PurchaseCreatedBy")
+  purchasesVoided             Purchase[]                  @relation("PurchaseVoidedBy")
+  materialConsumptionsCreated JobMaterialConsumption[]    @relation("MaterialConsumptionCreatedBy")
+  photoUploadIntentsCreated   PhotoUploadIntent[]         @relation("PhotoUploadIntentCreatedBy")
+  jobPhotosCreated            JobPhoto[]                  @relation("JobPhotoCreatedBy")
+  jobPhotosUpdated            JobPhoto[]                  @relation("JobPhotoUpdatedBy")
+  clientShareLinksCreated     ClientShareLink[]           @relation("ClientShareLinkCreatedBy")
+  clientShareLinksUpdated     ClientShareLink[]           @relation("ClientShareLinkUpdatedBy")
+
+  @@index([active])
+  @@map("users")
+}
+
+model Client {
+  id              String            @id @default(uuid()) @db.Uuid
+  displayName     String
+  firstName       String?
+  lastName        String?
+  phone           String?
+  normalizedPhone String?
+  whatsapp        String?
+  email           String?
+  instagram       String?
+  notes           String?
+  active          Boolean           @default(true)
+  archivedAt      DateTime?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  createdById     String?           @db.Uuid
+  updatedById     String?           @db.Uuid
+  createdBy       User?             @relation("ClientCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy       User?             @relation("ClientUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+  vehicles        Vehicle[]
+  serviceCases    ServiceCase[]
+  quotes          Quote[]
+  shareLinks      ClientShareLink[]
+
+  @@index([displayName])
+  @@index([normalizedPhone])
+  @@index([email])
+  @@index([active, createdAt])
+  @@index([createdById])
+  @@index([updatedById])
+  @@map("clients")
+}
+
+model ClientShareLink {
+  id           String    @id @default(uuid()) @db.Uuid
+  clientId     String    @db.Uuid
+  tokenHash    String    @unique
+  passwordHash String?
+  expiresAt    DateTime? @db.Timestamptz(3)
+  revokedAt    DateTime? @db.Timestamptz(3)
+  lastAccessAt DateTime? @db.Timestamptz(3)
+  createdAt    DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt    DateTime  @updatedAt @db.Timestamptz(3)
+  createdById  String?   @db.Uuid
+  updatedById  String?   @db.Uuid
+  client       Client    @relation(fields: [clientId], references: [id], onDelete: Restrict)
+  createdBy    User?     @relation("ClientShareLinkCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy    User?     @relation("ClientShareLinkUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  @@index([clientId, createdAt])
+  @@index([expiresAt, revokedAt])
+  @@map("client_share_links")
+}
+
+model Vehicle {
+  id             String        @id @default(uuid()) @db.Uuid
+  clientId       String        @db.Uuid
+  brand          String
+  model          String
+  version        String?
+  year           Int?
+  color          String?
+  vehicleClass   VehicleClass?
+  notes          String?
+  coverObjectKey String?
+  active         Boolean       @default(true)
+  archivedAt     DateTime?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  createdById    String?       @db.Uuid
+  updatedById    String?       @db.Uuid
+  client         Client        @relation(fields: [clientId], references: [id], onDelete: Restrict)
+  createdBy      User?         @relation("VehicleCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy      User?         @relation("VehicleUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+  serviceCases   ServiceCase[]
+  quotes         Quote[]
+
+  @@index([clientId, active])
+  @@index([brand, model])
+  @@index([createdById])
+  @@index([updatedById])
+  @@map("vehicles")
+}
+
+model ServiceCategory {
+  id          String    @id @default(uuid()) @db.Uuid
+  name        String
+  sortOrder   Int       @default(0)
+  active      Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  createdById String?   @db.Uuid
+  updatedById String?   @db.Uuid
+  createdBy   User?     @relation("ServiceCategoryCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy   User?     @relation("ServiceCategoryUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+  services    Service[]
+
+  @@unique([name])
+  @@index([active, sortOrder])
+  @@map("service_categories")
+}
+
+model Service {
+  id                       String               @id @default(uuid()) @db.Uuid
+  categoryId               String               @db.Uuid
+  name                     String
+  internalDescription      String?
+  commercialDescription    String?
+  basePriceUsd             Decimal?             @db.Decimal(19, 2)
+  estimatedDurationMinutes Int?
+  imageObjectKey           String?
+  sortOrder                Int                  @default(0)
+  active                   Boolean              @default(true)
+  createdAt                DateTime             @default(now())
+  updatedAt                DateTime             @updatedAt
+  createdById              String?              @db.Uuid
+  updatedById              String?              @db.Uuid
+  category                 ServiceCategory      @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  variants                 ServiceVariant[]
+  appointmentServices      AppointmentService[]
+  jobServices              JobService[]
+  quoteItems               QuoteItem[]
+  createdBy                User?                @relation("ServiceCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy                User?                @relation("ServiceUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  @@unique([categoryId, name])
+  @@index([active, sortOrder])
+  @@index([categoryId, active])
+  @@map("services")
+}
+
+model ServiceVariant {
+  id                       String             @id @default(uuid()) @db.Uuid
+  serviceId                String             @db.Uuid
+  type                     ServiceVariantType
+  label                    String
+  vehicleClass             VehicleClass?
+  matchBrand               String?
+  matchModel               String?
+  priceUsd                 Decimal            @db.Decimal(19, 2)
+  estimatedDurationMinutes Int?
+  priority                 Int                @default(0)
+  active                   Boolean            @default(true)
+  createdAt                DateTime           @default(now())
+  updatedAt                DateTime           @updatedAt
+  createdById              String?            @db.Uuid
+  updatedById              String?            @db.Uuid
+  service                  Service            @relation(fields: [serviceId], references: [id], onDelete: Restrict)
+  createdBy                User?              @relation("ServiceVariantCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy                User?              @relation("ServiceVariantUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  @@index([serviceId, active, type, priority])
+  @@map("service_variants")
+}
+
+model ServiceCase {
+  id               String                      @id @default(uuid()) @db.Uuid
+  clientId         String                      @db.Uuid
+  vehicleId        String                      @db.Uuid
+  origin           ServiceCaseOrigin
+  agreedAmountUsd  Decimal?                    @db.Decimal(19, 2)
+  agreedSourceCurrency SourceCurrency?
+  agreedSourceAmount Decimal?                  @db.Decimal(19, 2)
+  agreedExchangeRateArsPerUsd Decimal?          @db.Decimal(19, 6)
+  directCostUsd    Decimal?                    @db.Decimal(19, 2)
+  directCostSourceCurrency SourceCurrency?
+  directCostSourceAmount Decimal?              @db.Decimal(19, 2)
+  directCostExchangeRateArsPerUsd Decimal?       @db.Decimal(19, 6)
+  acceptedQuoteId  String?                     @unique @db.Uuid
+  createdAt        DateTime                    @default(now()) @db.Timestamptz(3)
+  updatedAt        DateTime                    @updatedAt @db.Timestamptz(3)
+  createdById      String?                     @db.Uuid
+  client           Client                      @relation(fields: [clientId], references: [id], onDelete: Restrict)
+  vehicle          Vehicle                     @relation(fields: [vehicleId], references: [id], onDelete: Restrict)
+  createdBy        User?                       @relation("ServiceCaseCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  acceptedQuote    Quote?                      @relation(fields: [acceptedQuoteId], references: [id], onDelete: Restrict)
+  appointments     Appointment[]
+  jobs             Job[]
+  financialEntries FinancialEntry[]
+  amountRevisions  ServiceCaseAmountRevision[]
+
+  @@index([clientId, vehicleId])
+  @@index([createdById])
+  @@map("service_cases")
+}
+
+model ServiceCaseAmountRevision {
+  id                String      @id @default(uuid()) @db.Uuid
+  serviceCaseId     String      @db.Uuid
+  previousAmountUsd Decimal?    @db.Decimal(19, 2)
+  newAmountUsd      Decimal     @db.Decimal(19, 2)
+  sourceCurrency    SourceCurrency @default(USD)
+  sourceAmount      Decimal        @db.Decimal(19, 2)
+  exchangeRateArsPerUsd Decimal?   @db.Decimal(19, 6)
+  reason            String
+  createdAt         DateTime    @default(now()) @db.Timestamptz(3)
+  createdById       String?     @db.Uuid
+  serviceCase       ServiceCase @relation(fields: [serviceCaseId], references: [id], onDelete: Restrict)
+  createdBy         User?       @relation("AmountRevisionCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@index([serviceCaseId, createdAt])
+  @@map("service_case_amount_revisions")
+}
+
+model FinancialCategory {
+  id          String             @id @default(uuid()) @db.Uuid
+  name        String
+  direction   FinancialDirection
+  active      Boolean            @default(true)
+  sortOrder   Int                @default(0)
+  createdAt   DateTime           @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime           @updatedAt @db.Timestamptz(3)
+  createdById String?            @db.Uuid
+  updatedById String?            @db.Uuid
+  createdBy   User?              @relation("FinancialCategoryCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy   User?              @relation("FinancialCategoryUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+  entries     FinancialEntry[]
+
+  @@unique([direction, name])
+  @@index([active, direction, sortOrder])
+  @@map("financial_categories")
+}
+
+model FinancialEntry {
+  id            String             @id @default(uuid()) @db.Uuid
+  direction     FinancialDirection
+  type          FinancialEntryType
+  amountUsd     Decimal            @db.Decimal(19, 2)
+  sourceCurrency SourceCurrency    @default(USD)
+  sourceAmount   Decimal           @db.Decimal(19, 2)
+  exchangeRateArsPerUsd Decimal?    @db.Decimal(19, 6)
+  occurredAt    DateTime           @db.Timestamptz(3)
+  description   String?
+  paymentMethod PaymentMethod?
+  serviceCaseId String?            @db.Uuid
+  categoryId    String?            @db.Uuid
+  purchaseId    String?            @unique @db.Uuid
+  salaryMonthId String?            @db.Uuid
+  salaryMonth   SalaryMonth?       @relation("SalaryPayments", fields: [salaryMonthId], references: [id], onDelete: Restrict)
+  activeSalaryPayment SalaryMonth? @relation("ActiveSalaryPayment")
+  reversalOfId  String?            @unique @db.Uuid
+  createdAt     DateTime           @default(now()) @db.Timestamptz(3)
+  createdById   String?            @db.Uuid
+  serviceCase   ServiceCase?       @relation(fields: [serviceCaseId], references: [id], onDelete: Restrict)
+  category      FinancialCategory? @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  purchase      Purchase?          @relation(fields: [purchaseId], references: [id], onDelete: Restrict)
+  reversalOf    FinancialEntry?    @relation("FinancialReversal", fields: [reversalOfId], references: [id], onDelete: Restrict)
+  reversedBy    FinancialEntry?    @relation("FinancialReversal")
+  createdBy     User?              @relation("FinancialEntryCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@index([occurredAt, direction])
+  @@index([serviceCaseId, occurredAt])
+  @@index([categoryId, occurredAt])
+  @@index([type, occurredAt])
+  @@index([salaryMonthId])
+  @@map("financial_entries")
+}
+
+model InventoryCategory {
+  id          String          @id @default(uuid()) @db.Uuid
+  name        String          @unique
+  active      Boolean         @default(true)
+  sortOrder   Int             @default(0)
+  createdAt   DateTime        @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime        @updatedAt @db.Timestamptz(3)
+  createdById String?         @db.Uuid
+  updatedById String?         @db.Uuid
+  createdBy   User?           @relation("InventoryCategoryCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy   User?           @relation("InventoryCategoryUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+  items       InventoryItem[]
+
+  @@index([active, sortOrder])
+  @@map("inventory_categories")
+}
+
+model InventoryItem {
+  id            String                   @id @default(uuid()) @db.Uuid
+  categoryId    String                   @db.Uuid
+  name          String
+  sku           String?                  @unique
+  baseUnit      String
+  currentStock  Decimal                  @default(0) @db.Decimal(19, 3)
+  minimumStock  Decimal                  @default(0) @db.Decimal(19, 3)
+  costHintUsd   Decimal?                 @db.Decimal(19, 2)
+  notes         String?
+  active        Boolean                  @default(true)
+  createdAt     DateTime                 @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime                 @updatedAt @db.Timestamptz(3)
+  createdById   String?                  @db.Uuid
+  updatedById   String?                  @db.Uuid
+  category      InventoryCategory        @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  presentations PurchasePresentation[]
+  movements     InventoryMovement[]
+  purchaseItems PurchaseItem[]
+  consumptions  JobMaterialConsumption[]
+  createdBy     User?                    @relation("InventoryItemCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy     User?                    @relation("InventoryItemUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  @@unique([categoryId, name])
+  @@index([active, name])
+  @@index([categoryId, active])
+  @@index([currentStock, minimumStock])
+  @@map("inventory_items")
+}
+
+model PurchasePresentation {
+  id            String         @id @default(uuid()) @db.Uuid
+  itemId        String         @db.Uuid
+  name          String
+  factorToBase  Decimal        @db.Decimal(19, 6)
+  active        Boolean        @default(true)
+  createdAt     DateTime       @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime       @updatedAt @db.Timestamptz(3)
+  item          InventoryItem  @relation(fields: [itemId], references: [id], onDelete: Restrict)
+  purchaseItems PurchaseItem[]
+
+  @@unique([itemId, name])
+  @@index([itemId, active])
+  @@map("purchase_presentations")
+}
+
+model InventoryMovement {
+  id                 String                  @id @default(uuid()) @db.Uuid
+  itemId             String                  @db.Uuid
+  type               InventoryMovementType
+  signedQuantityBase Decimal                 @db.Decimal(19, 3)
+  unitSnapshot       String
+  occurredAt         DateTime                @db.Timestamptz(3)
+  note               String
+  reversalOfId       String?                 @unique @db.Uuid
+  purchaseItemId     String?                 @unique @db.Uuid
+  consumptionId      String?                 @unique @db.Uuid
+  createdAt          DateTime                @default(now()) @db.Timestamptz(3)
+  createdById        String?                 @db.Uuid
+  item               InventoryItem           @relation(fields: [itemId], references: [id], onDelete: Restrict)
+  reversalOf         InventoryMovement?      @relation("InventoryReversal", fields: [reversalOfId], references: [id], onDelete: Restrict)
+  reversedBy         InventoryMovement?      @relation("InventoryReversal")
+  purchaseItem       PurchaseItem?           @relation(fields: [purchaseItemId], references: [id], onDelete: Restrict)
+  consumption        JobMaterialConsumption? @relation(fields: [consumptionId], references: [id], onDelete: Restrict)
+  createdBy          User?                   @relation("InventoryMovementCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@index([itemId, occurredAt])
+  @@index([type, occurredAt])
+  @@map("inventory_movements")
+}
+
+model Supplier {
+  id          String     @id @default(uuid()) @db.Uuid
+  name        String     @unique
+  contactName String?
+  phone       String?
+  email       String?
+  notes       String?
+  active      Boolean    @default(true)
+  createdAt   DateTime   @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime   @updatedAt @db.Timestamptz(3)
+  createdById String?    @db.Uuid
+  updatedById String?    @db.Uuid
+  createdBy   User?      @relation("SupplierCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy   User?      @relation("SupplierUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+  purchases   Purchase[]
+
+  @@index([active, name])
+  @@map("suppliers")
+}
+
+model PurchaseSequence {
+  year      Int      @id
+  nextValue Int
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+
+  @@map("purchase_sequences")
+}
+
+model Purchase {
+  id             String          @id @default(uuid()) @db.Uuid
+  supplierId     String          @db.Uuid
+  number         String          @unique
+  businessDate   DateTime        @db.Date
+  reference      String?
+  notes          String?
+  totalUsd       Decimal         @db.Decimal(19, 2)
+  sourceCurrency SourceCurrency @default(USD)
+  sourceTotal    Decimal        @db.Decimal(19, 2)
+  exchangeRateArsPerUsd Decimal? @db.Decimal(19, 6)
+  status         PurchaseStatus  @default(POSTED)
+  postedAt       DateTime        @default(now()) @db.Timestamptz(3)
+  voidedAt       DateTime?       @db.Timestamptz(3)
+  voidReason     String?
+  createdAt      DateTime        @default(now()) @db.Timestamptz(3)
+  createdById    String?         @db.Uuid
+  voidedById     String?         @db.Uuid
+  supplier       Supplier        @relation(fields: [supplierId], references: [id], onDelete: Restrict)
+  items          PurchaseItem[]
+  financialEntry FinancialEntry?
+  createdBy      User?           @relation("PurchaseCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  voidedBy       User?           @relation("PurchaseVoidedBy", fields: [voidedById], references: [id], onDelete: SetNull)
+
+  @@index([businessDate, status])
+  @@index([supplierId, businessDate])
+  @@map("purchases")
+}
+
+model PurchaseItem {
+  id                       String                @id @default(uuid()) @db.Uuid
+  purchaseId               String                @db.Uuid
+  itemId                   String                @db.Uuid
+  presentationId           String?               @db.Uuid
+  itemNameSnapshot         String
+  presentationNameSnapshot String
+  baseUnitSnapshot         String
+  factorToBaseSnapshot     Decimal               @db.Decimal(19, 6)
+  quantityPurchased        Decimal               @db.Decimal(19, 3)
+  quantityBase             Decimal               @db.Decimal(19, 3)
+  unitCostUsd              Decimal               @db.Decimal(19, 2)
+  sourceUnitCost           Decimal               @db.Decimal(19, 2)
+  sourceTotal              Decimal               @db.Decimal(19, 2)
+  totalUsd                 Decimal               @db.Decimal(19, 2)
+  sortOrder                Int                   @default(0)
+  purchase                 Purchase              @relation(fields: [purchaseId], references: [id], onDelete: Restrict)
+  item                     InventoryItem         @relation(fields: [itemId], references: [id], onDelete: Restrict)
+  presentation             PurchasePresentation? @relation(fields: [presentationId], references: [id], onDelete: SetNull)
+  inventoryMovement        InventoryMovement?
+
+  @@index([purchaseId, sortOrder])
+  @@index([itemId])
+  @@map("purchase_items")
+}
+
+model QuoteSequence {
+  year      Int      @id
+  nextValue Int
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+
+  @@map("quote_sequences")
+}
+
+model Quote {
+  id                  String       @id @default(uuid()) @db.Uuid
+  clientId            String       @db.Uuid
+  vehicleId           String       @db.Uuid
+  number              String       @unique
+  status              QuoteStatus  @default(DRAFT)
+  issuedOn            DateTime     @db.Date
+  validUntil          DateTime?    @db.Date
+  notes               String?
+  terms               String?
+  subtotalUsd         Decimal      @db.Decimal(19, 2)
+  discountUsd         Decimal      @default(0) @db.Decimal(19, 2)
+  totalUsd            Decimal      @db.Decimal(19, 2)
+  sourceCurrency      SourceCurrency @default(USD)
+  sourceSubtotal      Decimal        @db.Decimal(19, 2)
+  sourceDiscount      Decimal        @db.Decimal(19, 2)
+  sourceTotal         Decimal        @db.Decimal(19, 2)
+  exchangeRateArsPerUsd Decimal?      @db.Decimal(19, 6)
+  templateVersion     Int          @default(1)
+  pdfArtifactKey      String?
+  pdfSha256           String?
+  pdfGeneratedAt      DateTime?    @db.Timestamptz(3)
+  sentAt              DateTime?    @db.Timestamptz(3)
+  acceptedAt          DateTime?    @db.Timestamptz(3)
+  rejectedAt          DateTime?    @db.Timestamptz(3)
+  createdAt           DateTime     @default(now()) @db.Timestamptz(3)
+  updatedAt           DateTime     @updatedAt @db.Timestamptz(3)
+  createdById         String?      @db.Uuid
+  updatedById         String?      @db.Uuid
+  client              Client       @relation(fields: [clientId], references: [id], onDelete: Restrict)
+  vehicle             Vehicle      @relation(fields: [vehicleId], references: [id], onDelete: Restrict)
+  items               QuoteItem[]
+  acceptedServiceCase ServiceCase?
+  createdBy           User?        @relation("QuoteCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy           User?        @relation("QuoteUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  @@index([status, issuedOn])
+  @@index([clientId, issuedOn])
+  @@index([vehicleId])
+  @@map("quotes")
+}
+
+model QuoteItem {
+  id                  String   @id @default(uuid()) @db.Uuid
+  quoteId             String   @db.Uuid
+  serviceId           String?  @db.Uuid
+  nameSnapshot        String
+  descriptionSnapshot String?
+  quantity            Decimal  @db.Decimal(12, 3)
+  unitPriceUsd        Decimal  @db.Decimal(19, 2)
+  discountUsd         Decimal  @default(0) @db.Decimal(19, 2)
+  totalUsd            Decimal  @db.Decimal(19, 2)
+  sourceUnitPrice     Decimal  @db.Decimal(19, 2)
+  sourceDiscount      Decimal  @db.Decimal(19, 2)
+  sourceTotal         Decimal  @db.Decimal(19, 2)
+  sortOrder           Int      @default(0)
+  quote               Quote    @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+  service             Service? @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+
+  @@index([quoteId, sortOrder])
+  @@index([serviceId])
+  @@map("quote_items")
+}
+
+model Appointment {
+  id              String                @id @default(uuid()) @db.Uuid
+  serviceCaseId   String                @db.Uuid
+  startAt         DateTime              @db.Timestamptz(3)
+  endAt           DateTime              @db.Timestamptz(3)
+  status          AppointmentStatus     @default(CONFIRMED)
+  internalNotes   String?
+  color           String?
+  visibleToClient Boolean               @default(true)
+  cancelledAt     DateTime?             @db.Timestamptz(3)
+  createdAt       DateTime              @default(now()) @db.Timestamptz(3)
+  updatedAt       DateTime              @updatedAt @db.Timestamptz(3)
+  createdById     String?               @db.Uuid
+  updatedById     String?               @db.Uuid
+  serviceCase     ServiceCase           @relation(fields: [serviceCaseId], references: [id], onDelete: Restrict)
+  services        AppointmentService[]
+  employees       AppointmentEmployee[]
+  createdBy       User?                 @relation("AppointmentCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy       User?                 @relation("AppointmentUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+  job             Job?
+
+  @@index([startAt, endAt, status])
+  @@index([serviceCaseId])
+  @@map("appointments")
+}
+
+model AppointmentService {
+  id                      String      @id @default(uuid()) @db.Uuid
+  appointmentId           String      @db.Uuid
+  serviceId               String?     @db.Uuid
+  nameSnapshot            String
+  durationMinutesSnapshot Int?
+  sortOrder               Int         @default(0)
+  appointment             Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  service                 Service?    @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+
+  @@index([appointmentId, sortOrder])
+  @@index([serviceId])
+  @@map("appointment_services")
+}
+
+model AppointmentEmployee {
+  appointmentId String      @db.Uuid
+  userId        String      @db.Uuid
+  appointment   Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  user          User        @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@id([appointmentId, userId])
+  @@index([userId])
+  @@map("appointment_employees")
+}
+
+model CalendarBlock {
+  id          String    @id @default(uuid()) @db.Uuid
+  startAt     DateTime  @db.Timestamptz(3)
+  endAt       DateTime  @db.Timestamptz(3)
+  allDay      Boolean   @default(false)
+  reason      String
+  color       String?
+  notes       String?
+  active      Boolean   @default(true)
+  cancelledAt DateTime? @db.Timestamptz(3)
+  createdAt   DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime  @updatedAt @db.Timestamptz(3)
+  createdById String?   @db.Uuid
+  updatedById String?   @db.Uuid
+  createdBy   User?     @relation("CalendarBlockCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy   User?     @relation("CalendarBlockUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  @@index([startAt, endAt, active])
+  @@map("calendar_blocks")
+}
+
+model Job {
+  id                   String                   @id @default(uuid()) @db.Uuid
+  serviceCaseId        String                   @db.Uuid
+  originAppointmentId  String?                  @unique @db.Uuid
+  performedAt          DateTime                 @db.Timestamptz(3)
+  notes                String?
+  voidedAt             DateTime?                @db.Timestamptz(3)
+  voidReason           String?
+  createdAt            DateTime                 @default(now()) @db.Timestamptz(3)
+  updatedAt            DateTime                 @updatedAt @db.Timestamptz(3)
+  createdById          String?                  @db.Uuid
+  updatedById          String?                  @db.Uuid
+  serviceCase          ServiceCase              @relation(fields: [serviceCaseId], references: [id], onDelete: Restrict)
+  originAppointment    Appointment?             @relation(fields: [originAppointmentId], references: [id], onDelete: Restrict)
+  services             JobService[]
+  employees            JobEmployee[]
+  materialConsumptions JobMaterialConsumption[]
+  photoUploadIntents   PhotoUploadIntent[]
+  photos               JobPhoto[]
+  createdBy            User?                    @relation("JobCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy            User?                    @relation("JobUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  @@index([performedAt])
+  @@index([serviceCaseId, performedAt])
+  @@index([voidedAt])
+  @@map("jobs")
+}
+
+model JobService {
+  id                  String   @id @default(uuid()) @db.Uuid
+  jobId               String   @db.Uuid
+  serviceId           String?  @db.Uuid
+  nameSnapshot        String
+  descriptionSnapshot String?
+  sortOrder           Int      @default(0)
+  job                 Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  service             Service? @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+
+  @@index([jobId, sortOrder])
+  @@index([serviceId])
+  @@map("job_services")
+}
+
+model JobEmployee {
+  jobId  String @db.Uuid
+  userId String @db.Uuid
+  job    Job    @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@id([jobId, userId])
+  @@index([userId])
+  @@map("job_employees")
+}
+
+model JobMaterialConsumption {
+  id           String                  @id @default(uuid()) @db.Uuid
+  jobId        String                  @db.Uuid
+  itemId       String                  @db.Uuid
+  quantityBase Decimal                 @db.Decimal(19, 3)
+  unitSnapshot String
+  note         String?
+  replacesId   String?                 @unique @db.Uuid
+  createdAt    DateTime                @default(now()) @db.Timestamptz(3)
+  createdById  String?                 @db.Uuid
+  job          Job                     @relation(fields: [jobId], references: [id], onDelete: Restrict)
+  item         InventoryItem           @relation(fields: [itemId], references: [id], onDelete: Restrict)
+  movement     InventoryMovement?
+  replaces     JobMaterialConsumption? @relation("ConsumptionReplacement", fields: [replacesId], references: [id], onDelete: Restrict)
+  replacedBy   JobMaterialConsumption? @relation("ConsumptionReplacement")
+  createdBy    User?                   @relation("MaterialConsumptionCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@index([jobId, createdAt])
+  @@index([itemId, createdAt])
+  @@map("job_material_consumptions")
+}
+
+model PhotoUploadIntent {
+  id              String    @id @default(uuid()) @db.Uuid
+  jobId           String    @db.Uuid
+  objectKey       String    @unique
+  expectedMime    String
+  expectedSize    Int
+  uploadTokenHash String
+  expiresAt       DateTime  @db.Timestamptz(3)
+  uploadedAt      DateTime? @db.Timestamptz(3)
+  confirmedAt     DateTime? @db.Timestamptz(3)
+  createdAt       DateTime  @default(now()) @db.Timestamptz(3)
+  createdById     String?   @db.Uuid
+  job             Job       @relation(fields: [jobId], references: [id], onDelete: Restrict)
+  photo           JobPhoto?
+  createdBy       User?     @relation("PhotoUploadIntentCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@index([jobId, expiresAt])
+  @@index([expiresAt, confirmedAt])
+  @@map("photo_upload_intents")
+}
+
+model JobPhoto {
+  id              String            @id @default(uuid()) @db.Uuid
+  jobId           String            @db.Uuid
+  uploadIntentId  String            @unique @db.Uuid
+  stage           PhotoStage?
+  originalKey     String            @unique
+  previewKey      String            @unique
+  thumbnailKey    String            @unique
+  mimeType        String
+  width           Int
+  height          Int
+  sizeBytes       Int
+  sortOrder       Int               @default(0)
+  isCover         Boolean           @default(false)
+  visibleToClient Boolean           @default(false)
+  deletedAt       DateTime?         @db.Timestamptz(3)
+  createdAt       DateTime          @default(now()) @db.Timestamptz(3)
+  updatedAt       DateTime          @updatedAt @db.Timestamptz(3)
+  createdById     String?           @db.Uuid
+  updatedById     String?           @db.Uuid
+  job             Job               @relation(fields: [jobId], references: [id], onDelete: Restrict)
+  uploadIntent    PhotoUploadIntent @relation(fields: [uploadIntentId], references: [id], onDelete: Restrict)
+  createdBy       User?             @relation("JobPhotoCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy       User?             @relation("JobPhotoUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  @@index([jobId, deletedAt, sortOrder])
+  @@index([jobId, visibleToClient, deletedAt])
+  @@map("job_photos")
+}
+
+model PendingStorageDeletion {
+  id        String   @id @default(uuid()) @db.Uuid
+  objectKey String   @unique
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+
+  @@index([createdAt])
+  @@map("pending_storage_deletions")
+}
+
+model Session {
+  id        String   @id @default(uuid()) @db.Uuid
+  expiresAt DateTime
+  token     String   @unique
+  ipAddress String?
+  userAgent String?
+  userId    String   @db.Uuid
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("sessions")
+}
+
+model Account {
+  id                    String    @id @default(uuid()) @db.Uuid
+  accountId             String
+  providerId            String
+  userId                String    @db.Uuid
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@unique([providerId, accountId])
+  @@index([userId])
+  @@map("accounts")
+}
+
+model Verification {
+  id         String   @id @default(uuid()) @db.Uuid
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verifications")
+}
+
+model RateLimit {
+  id          String @id @default(uuid()) @db.Uuid
+  key         String @unique
+  count       Int
+  lastRequest BigInt
+
+  @@map("rate_limits")
+}
+
+model IdempotencyKey {
+  id              String   @id @default(uuid()) @db.Uuid
+  key             String
+  operation       String
+  actorId         String?  @db.Uuid
+  actor           User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  requestHash     String
+  resultReference String?
+  expiresAt       DateTime
+  createdAt       DateTime @default(now())
+
+  @@unique([operation, key])
+  @@index([actorId])
+  @@index([expiresAt])
+  @@map("idempotency_keys")
+}
+
+model Salary {
+  id          String        @id @default(uuid()) @db.Uuid
+  name        String
+  startMonth  String        @db.VarChar(7)
+  endMonth    String?       @db.VarChar(7)
+  version     Int           @default(0)
+  createdAt   DateTime      @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime      @updatedAt @db.Timestamptz(3)
+  createdById String?       @db.Uuid
+  createdBy   User?         @relation(fields: [createdById], references: [id], onDelete: SetNull)
+  rates       SalaryRate[]
+  months      SalaryMonth[]
+  events      SalaryEvent[]
+
+  @@map("salaries")
+}
+
+model SalaryRate {
+  id             String   @id @default(uuid()) @db.Uuid
+  salaryId       String   @db.Uuid
+  effectiveMonth String   @db.VarChar(7)
+  amountUsd      Decimal  @map("amountArs") @db.Decimal(19, 2)
+  salary         Salary   @relation(fields: [salaryId], references: [id], onDelete: Restrict)
+  createdAt      DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime @updatedAt @db.Timestamptz(3)
+
+  @@unique([salaryId, effectiveMonth])
+  @@map("salary_rates")
+}
+
+model SalaryMonth {
+  id             String            @id @default(uuid()) @db.Uuid
+  salaryId       String            @db.Uuid
+  month          String            @db.VarChar(7)
+  amountUsd      Decimal           @map("amountArs") @db.Decimal(19, 2)
+  status         SalaryMonthStatus @default(PENDING)
+  version        Int               @default(0)
+  paymentEntryId String?           @unique @db.Uuid
+  payment        FinancialEntry?   @relation("ActiveSalaryPayment", fields: [paymentEntryId], references: [id], onDelete: Restrict)
+  payments       FinancialEntry[]  @relation("SalaryPayments")
+  salary         Salary            @relation(fields: [salaryId], references: [id], onDelete: Restrict)
+  createdAt      DateTime          @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime          @updatedAt @db.Timestamptz(3)
+
+  @@unique([salaryId, month])
+  @@index([status, month])
+  @@map("salary_months")
+}
+
+model SalaryEvent {
+  id          String   @id @default(uuid()) @db.Uuid
+  salaryId    String   @db.Uuid
+  action      String
+  detail      Json
+  createdAt   DateTime @default(now()) @db.Timestamptz(3)
+  createdById String?  @db.Uuid
+  createdBy   User?    @relation(fields: [createdById], references: [id], onDelete: SetNull)
+  salary      Salary   @relation(fields: [salaryId], references: [id], onDelete: Restrict)
+
+  @@index([salaryId, createdAt])
+  @@map("salary_events")
+}
