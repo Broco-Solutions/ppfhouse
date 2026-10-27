@@ -6,13 +6,10 @@ import { prisma } from "@/infrastructure/db/client";
 import { hashPassword, verifyPassword } from "@/infrastructure/auth/password";
 
 export const auth = betterAuth({
-  appName: "Ferraro Manager",
+  appName: "PPF HOUSE",
   baseURL: env.BETTER_AUTH_URL,
   secret: env.BETTER_AUTH_SECRET,
-  trustedOrigins: [
-    env.BETTER_AUTH_URL,
-    "https://ferraro-manager.brocosolutions.com",
-  ],
+  trustedOrigins: [env.BETTER_AUTH_URL],
   database: prismaAdapter(prisma, { provider: "postgresql" }),
   emailAndPassword: {
     enabled: true,

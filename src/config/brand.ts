@@ -1,17 +1,18 @@
 export const brandConfig = {
-  productName: "Ferraro Manager",
-  businessName: "Ferraro Detail",
-  shortName: "Ferraro",
-  /** Temporary text fallback for legacy surfaces; migrate to assets.mark. */
-  mark: "F",
-  location: "Rosario, Santa Fe",
+  productName: "PPF HOUSE",
+  businessName: "PPF HOUSE",
+  shortName: "PPF HOUSE",
+  /** Text-only identification until the official shield source is supplied. */
+  mark: "PPF HOUSE",
+  location: "", // Awaiting PPF HOUSE location confirmation.
   country: "Argentina",
+  // Empty paths deliberately avoid displaying inherited or invented artwork.
   assets: {
-    logo: "/brand/ferraro-logo-tricolor.svg",
-    logoMonochrome: "/brand/ferraro-logo-black.svg",
-    logoInverse: "/brand/ferraro-logo-white.svg",
-    mark: "/brand/ferraro-mark-tricolor.svg",
-    lockup: "/brand/ferraro-lockup-detail-tricolor.svg",
+    logo: "",
+    logoMonochrome: "",
+    logoInverse: "",
+    mark: "",
+    lockup: "",
     manifest: "/brand/manifest.json",
   },
   contact: {
@@ -25,10 +26,10 @@ export const brandConfig = {
       "Los valores se expresan en USD. La fecha de ejecución queda sujeta a disponibilidad de agenda.",
   },
   theme: {
-    brandAccentToken: "--brand-yellow",
+    brandAccentToken: "--brand-blue",
     primaryToken: "--primary",
     surfaceToken: "--surface",
-    themeColor: "#171817",
+    themeColor: "#0F1115",
   },
 } as const;
 

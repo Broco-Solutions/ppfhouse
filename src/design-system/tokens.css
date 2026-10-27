@@ -1,49 +1,49 @@
 @layer tokens {
   :root {
-    /* Official Ferraro palette. Do not reinterpret these source values. */
-    --brand-black: #000000;
-    --brand-gray: #706f6f;
-    --brand-yellow: #ffce13;
+    /* Initial PPF HOUSE interface proposal; not an official brand manual. */
+    --brand-black: #1f2329;
+    --brand-gray: #6b7280;
+    --brand-blue: #3d5afe;
     --brand-white: #ffffff;
 
     /* Neutral surfaces and readable foregrounds. */
-    --background: #f7f6f3;
-    --surface: #fbfaf8;
+    --background: #f8f9fb;
+    --surface: #ffffff;
     --surface-raised: #ffffff;
-    --surface-subtle: #f0eee9;
-    --surface-inverse: #171817;
-    --foreground: #181917;
-    --foreground-muted: #5d605b;
-    --foreground-subtle: #686b64;
-    --foreground-inverse: #f8f7f3;
-    --border: #e4e2dc;
-    --border-strong: #c9c6be;
-    --border-inverse: #3b3d39;
+    --surface-subtle: #f3f4f6;
+    --surface-inverse: #0f1115;
+    --foreground: #1f2329;
+    --foreground-muted: #626975;
+    --foreground-subtle: #6b7280;
+    --foreground-inverse: #f8f9fb;
+    --border: #e5e7eb;
+    --border-strong: #c4c9d1;
+    --border-inverse: #3b414b;
 
     /* Shell surfaces. */
-    --sidebar-background: #121312;
-    --sidebar-foreground: #f7f6f2;
-    --sidebar-muted: #b7bab3;
+    --sidebar-background: #1f2329;
+    --sidebar-foreground: #f8f9fb;
+    --sidebar-muted: #b7bec9;
     --sidebar-foreground-muted: var(--sidebar-muted);
-    --sidebar-hover: #1f211f;
-    --sidebar-active: #2a2c29;
-    --sidebar-border: #262825;
-    --sidebar-accent: #ffce13;
+    --sidebar-hover: #292f38;
+    --sidebar-active: #303846;
+    --sidebar-border: #353c46;
+    --sidebar-accent: var(--brand-blue);
 
     /* Interaction is independent from brand accent and semantic status. */
-    --primary: #171817;
-    --primary-hover: #2c2e2b;
-    --primary-active: #000000;
+    --primary: var(--brand-blue);
+    --primary-hover: #3048e8;
+    --primary-active: #263dcc;
     --on-primary: #ffffff;
     --secondary: #ffffff;
-    --secondary-hover: #f3f1ec;
-    --on-secondary: #20211f;
-    --link: #30332f;
-    --link-hover: #000000;
-    --focus-ring: #6b5500;
-    --focus-accent: #ffce13;
+    --secondary-hover: #f3f4f6;
+    --on-secondary: #1f2329;
+    --link: #3048e8;
+    --link-hover: #263dcc;
+    --focus-ring: #3d5afe;
+    --focus-accent: var(--brand-blue);
 
-    /* Semantic colors never borrow meaning from Ferraro yellow. */
+    /* Semantic status colors remain independent of the brand palette. */
     --success: #21613d;
     --success-surface: #e6f3eb;
     --warning: #7b4b00;
@@ -150,12 +150,12 @@
     --color-surface-raised: var(--surface-raised);
     --color-border: var(--border);
     --color-border-strong: var(--border-strong);
-    --color-accent: #9b7a3c;
-    --color-accent-strong: #725621;
+    --color-accent: var(--brand-blue);
+    --color-accent-strong: var(--link);
     --color-success: var(--success);
     --color-danger: var(--danger);
     --color-dark: var(--surface-inverse);
-    --color-dark-soft: #242721;
+    --color-dark-soft: #292f38;
     --color-on-dark: var(--foreground-inverse);
   }
 

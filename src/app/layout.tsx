@@ -29,8 +29,10 @@ export const metadata: Metadata = {
     default: brandConfig.productName,
     template: `%s · ${brandConfig.productName}`,
   },
-  description: "Gestión interna de Ferraro Detail.",
-  icons: { icon: brandConfig.assets.mark },
+  description: "Gestión interna de PPF HOUSE.",
+  icons: brandConfig.assets.mark
+    ? { icon: brandConfig.assets.mark }
+    : undefined,
   robots: { index: false, follow: false },
 };
 

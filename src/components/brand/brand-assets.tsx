@@ -22,7 +22,7 @@ const logoSources: Record<BrandVariant, string> = {
   tricolor: brandConfig.assets.logo,
   monochrome: brandConfig.assets.logoMonochrome,
   inverse: brandConfig.assets.logoInverse,
-  outline: "/brand/ferraro-logo-outline.svg",
+  outline: brandConfig.assets.logoMonochrome,
 };
 
 export function BrandLogo({
@@ -32,6 +32,24 @@ export function BrandLogo({
   variant = "tricolor",
   width = 144,
 }: BrandLogoProps) {
+  if (!logoSources[variant]) {
+    return (
+      <span
+        aria-hidden={decorative || undefined}
+        aria-label={decorative ? undefined : brandConfig.businessName}
+        className={cx(
+          styles.wordmark,
+          variant === "inverse" ? styles.inverse : styles.dark,
+          className,
+        )}
+        role={decorative ? undefined : "img"}
+        style={{ maxWidth: "100%", width }}
+      >
+        {brandConfig.businessName}
+      </span>
+    );
+  }
+
   return (
     <Image
       alt={decorative ? "" : brandConfig.shortName}
@@ -52,8 +70,8 @@ interface BrandMarkProps extends BrandAssetProps {
 
 const markSources = {
   tricolor: brandConfig.assets.mark,
-  monochrome: "/brand/ferraro-mark-outline.svg",
-  outline: "/brand/ferraro-mark-outline.svg",
+  monochrome: brandConfig.assets.mark,
+  outline: brandConfig.assets.mark,
 } as const;
 
 export function BrandMark({
@@ -63,6 +81,22 @@ export function BrandMark({
   size = 40,
   variant = "tricolor",
 }: BrandMarkProps) {
+  if (!markSources[variant]) {
+    return (
+      <span
+        aria-hidden={decorative || undefined}
+        aria-label={decorative ? undefined : brandConfig.businessName}
+        className={cx(styles.textMark, className)}
+        role={decorative ? undefined : "img"}
+        style={{ fontSize: size * 0.2, width: size, height: size }}
+      >
+        PPF
+        <br />
+        HOUSE
+      </span>
+    );
+  }
+
   return (
     <Image
       alt={decorative ? "" : brandConfig.shortName}
@@ -88,6 +122,18 @@ export function BrandLockup({
   variant = "tricolor",
   width = 192,
 }: BrandLockupProps) {
+  if (!brandConfig.assets.lockup) {
+    return (
+      <BrandLogo
+        className={className}
+        decorative={decorative}
+        priority={priority}
+        variant={variant}
+        width={width}
+      />
+    );
+  }
+
   return (
     <Image
       alt={decorative ? "" : brandConfig.businessName}
@@ -98,7 +144,7 @@ export function BrandLockup({
       src={
         variant === "tricolor"
           ? brandConfig.assets.lockup
-          : "/brand/ferraro-lockup-detail-black.svg"
+          : brandConfig.assets.logoMonochrome
       }
       width={width}
     />

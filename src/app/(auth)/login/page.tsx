@@ -18,19 +18,19 @@ export default async function LoginPage() {
 
   return (
     <main className={styles.page}>
-      <section className={styles.brandPanel} aria-label="Ferraro Manager">
+      <section className={styles.brandPanel} aria-label="PPF HOUSE">
         <div className={styles.brandPlate}>
           <BrandLockup className={styles.lockup} priority />
         </div>
         <div className={styles.brandCopy}>
-          <p className={styles.eyebrow}>Gestión interna · Ferraro Detail</p>
+          <p className={styles.eyebrow}>Gestión interna · PPF HOUSE</p>
           <h1>El taller, claro y bajo control.</h1>
           <p>
             Una base precisa para coordinar cada jornada, desde el primer turno
             hasta la entrega final.
           </p>
         </div>
-        <div className={styles.brandFooter}>Rosario · Santa Fe · Argentina</div>
+        <div className={styles.brandFooter}>PPF HOUSE · Argentina</div>
       </section>
 
       <section className={styles.formPanel}>

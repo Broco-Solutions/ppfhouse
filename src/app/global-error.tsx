@@ -21,7 +21,7 @@ export default function GlobalError({ reset }: { reset: () => void }) {
           }
           code="Error global"
           description="Reintentá. Si persiste, contactá al responsable técnico."
-          title="Ferraro Manager no pudo iniciar"
+          title="PPF HOUSE no pudo iniciar"
         />
       </body>
     </html>

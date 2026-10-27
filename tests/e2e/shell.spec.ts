@@ -29,7 +29,7 @@ test("ADMIN navigation marks the route and persists the collapsed sidebar", asyn
   const sidebar = page.getByRole("complementary", {
     name: "Navegación lateral",
   });
-  const mark = sidebar.locator('a[aria-label="Ir al inicio"] img').last();
+  const mark = sidebar.locator('a[aria-label="Ir al inicio"] > :last-child');
   const expandButton = sidebar.getByRole("button", {
     name: "Expandir navegación",
   });

@@ -10,7 +10,7 @@ test("login exposes branded accessible idle and error states", async ({
   await page.goto("/login");
 
   await expect(
-    page.getByRole("img", { name: "Ferraro Detail" }).first(),
+    page.getByRole("img", { name: "PPF HOUSE" }).first(),
   ).toBeVisible();
   await expect(page.getByRole("heading", { name: "Bienvenido" })).toBeVisible();
   const accessibility = await new AxeBuilder({ page })

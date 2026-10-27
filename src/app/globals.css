@@ -84,12 +84,12 @@
 }
 
 .hero-stock.is-low strong {
-  color: var(--color-accent-strong);
+  color: var(--warning);
 }
 
 .status-warning {
-  color: var(--color-accent-strong);
-  background: rgb(155 122 60 / 12%);
+  color: var(--warning);
+  background: var(--warning-surface);
 }
 
 .status-danger {
@@ -556,9 +556,9 @@ summary {
 }
 
 .warning-banner {
-  border-color: var(--color-accent);
-  background: color-mix(in srgb, var(--color-accent) 12%, white);
-  color: var(--color-accent-strong);
+  border-color: var(--warning);
+  background: var(--warning-surface);
+  color: var(--warning);
 }
 
 .detail-summary {
@@ -1363,8 +1363,8 @@ h2 {
   min-height: 100svh;
   overflow: hidden;
   background:
-    radial-gradient(circle at 72% 18%, rgb(155 122 60 / 24%), transparent 30%),
-    linear-gradient(145deg, #20231e, #10110f 72%);
+    radial-gradient(circle at 72% 18%, rgb(61 90 254 / 24%), transparent 30%),
+    linear-gradient(145deg, #1f2329, #0f1115 72%);
   color: var(--color-on-dark);
   padding: clamp(2rem, 5vw, 4rem);
 }
@@ -1384,7 +1384,7 @@ h2 {
   inset: 18% auto auto -24%;
   width: 75%;
   aspect-ratio: 1;
-  border: 1px solid rgb(155 122 60 / 28%);
+  border: 1px solid rgb(61 90 254 / 28%);
   border-radius: 50%;
   content: "";
 }
@@ -1603,7 +1603,7 @@ a.nav-link:hover {
   place-items: center;
   border-radius: 50%;
   background: var(--color-accent);
-  color: #171814;
+  color: var(--on-primary);
   font-size: 0.78rem;
   font-weight: var(--weight-semibold);
 }
@@ -1777,7 +1777,7 @@ a.nav-link:hover {
   min-height: 100svh;
   place-items: center;
   background:
-    radial-gradient(circle at 50% 0, rgb(155 122 60 / 12%), transparent 36%),
+    radial-gradient(circle at 50% 0, rgb(61 90 254 / 12%), transparent 36%),
     var(--color-canvas);
   padding: var(--space-6);
 }
@@ -2753,7 +2753,7 @@ a.nav-link:hover {
 }
 
 .dashboard-kpis .kpi-attention {
-  background: color-mix(in srgb, var(--color-accent) 9%, transparent);
+  background: color-mix(in srgb, var(--warning) 9%, transparent);
 }
 
 .dashboard-columns {

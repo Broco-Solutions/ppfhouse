@@ -17,3 +17,32 @@
 .mark {
   min-width: 1.25rem;
 }
+
+/* Temporary text identification, pending the user-supplied official shield. */
+.wordmark {
+  display: block;
+  max-width: 100%;
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.dark {
+  color: var(--brand-black);
+}
+
+.inverse {
+  color: var(--brand-white);
+}
+
+.textMark {
+  display: grid;
+  align-content: center;
+  text-align: center;
+  font-family: var(--font-sans);
+  font-weight: var(--weight-bold);
+  line-height: 1.1;
+}

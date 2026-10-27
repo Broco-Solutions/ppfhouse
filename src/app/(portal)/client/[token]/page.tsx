@@ -54,7 +54,7 @@ export default async function ClientPortalPage({
           <p className={styles.eyebrow}>Acceso privado</p>
           <h1>Este link ya no está disponible.</h1>
           <p>
-            Pedile a Ferraro un nuevo acceso si necesitás consultar tu
+            Pedile a PPF HOUSE un nuevo acceso si necesitás consultar tu
             historial.
           </p>
         </section>
@@ -72,7 +72,7 @@ export default async function ClientPortalPage({
       <PortalFrame>
         <section className={styles.access}>
           <p className={styles.eyebrow}>Acceso privado</p>
-          <h1>Tu historial Ferraro.</h1>
+          <h1>Tu historial PPF HOUSE.</h1>
           <p>Ingresá la contraseña que recibiste junto con este link.</p>
           <PortalUnlockForm token={token} />
         </section>
@@ -88,7 +88,7 @@ export default async function ClientPortalPage({
       <section className={styles.hero}>
         <p className={styles.eyebrow}>Espacio privado</p>
         <h1>Hola, {portal.displayName}.</h1>
-        <p>Tu garage y el trabajo realizado por Ferraro, en un solo lugar.</p>
+        <p>Tu garage y el trabajo realizado por PPF HOUSE, en un solo lugar.</p>
       </section>
 
       <section className={styles.section}>
@@ -109,7 +109,7 @@ export default async function ClientPortalPage({
                 <p>
                   {[vehicle.version, vehicle.year, vehicle.color]
                     .filter(Boolean)
-                    .join(" · ") || "Cuidado por Ferraro"}
+                    .join(" · ") || "Cuidado por PPF HOUSE"}
                 </p>
               </div>
             </article>
@@ -183,7 +183,7 @@ export default async function ClientPortalPage({
                       </li>
                     ))
                   ) : (
-                    <li>Trabajo documentado por Ferraro</li>
+                    <li>Trabajo documentado por PPF HOUSE</li>
                   )}
                 </ul>
                 {job.photos.length ? (

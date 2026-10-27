@@ -34,7 +34,7 @@
   bottom: 0;
   width: 0.375rem;
   height: 38%;
-  background: var(--brand-yellow);
+  background: var(--brand-blue);
   content: "";
 }
 
@@ -62,7 +62,7 @@
 
 .eyebrow {
   margin: 0 0 var(--space-5);
-  color: var(--brand-yellow);
+  color: #91a3ff;
   font-size: var(--text-xs);
   font-weight: var(--weight-bold);
 }

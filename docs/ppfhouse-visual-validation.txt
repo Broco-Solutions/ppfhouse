@@ -1,0 +1,133 @@
+PPF HOUSE — Entrega de adaptación visual
+Fecha: 27/10/2026
+Estado: adaptación de interfaz implementada; identidad gráfica oficial pendiente.
+
+Repositorio: Broco-Solutions/ppfhouse, rama main.
+Antes de editar se ejecutó git fetch origin main y se verificó que HEAD y
+origin/main coinciden con 5e86c4470f5ecd2eea62a06d15e761c26f37f1f4.
+Se inspeccionaron las rutas actuales y la implementación AppShell -> ShellFrame.
+No se accedió ni se modificó el repositorio original ferraro-manager.
+No se hizo commit, push ni despliegue.
+
+Cambios implementados
+- Nombre institucional PPF HOUSE en configuración, login, metadatos, dashboard,
+  buscador, textos internos, estados de error, portal de clientes y presupuestos.
+- Superficies claras, sidebar grafito, botones principales azules y foco azul.
+- Reutilización de Inter, componentes de marca, tokens y estructura responsive.
+- Advertencias, éxito y error mantienen significado semántico independiente.
+- PDF: identificación tipográfica PPF HOUSE y acento azul. Se retiraron los paths
+  de Ferraro; se conservaron cálculos, monedas, tablas y condiciones.
+- Autenticación: únicamente appName y eliminación del origen explícito Ferraro.
+  Se conserva env.BETTER_AUTH_URL y las reglas restantes de autenticación.
+- La página del sistema de diseño y el manifiesto identifican la paleta como
+  propuesta inicial de interfaz, sin atribuirle carácter oficial.
+- La ubicación Rosario/Santa Fe heredada se omite de login, reloj del dashboard y PDF hasta confirmar
+  la sede de PPF HOUSE. La propiedad location se conserva vacía.
+
+Recursos gráficos y procedencia
+No se recibió ni encontró el archivo del escudo oficial. No se vectorizó ni
+inventó un isotipo. No se crearon SVG de PPF HOUSE ni se reutilizaron gráficos
+Ferraro. BrandLogo, BrandMark y BrandLockup muestran texto provisional, en Inter,
+y conservan sus interfaces. Los paths de gráficos permanecen vacíos de forma
+explícita; los componentes evitan solicitar imágenes vacías o inexistentes.
+El favicon se omite hasta disponer del escudo real.
+public/brand/manifest.json documenta este estado y la procedencia histórica de
+los SVG Ferraro retenidos pero no usados por la interfaz.
+
+Validaciones
+- pnpm db:generate: OK.
+- pnpm lint: OK.
+- pnpm typecheck: OK.
+- pnpm build: OK (build final posterior a los cambios visuales).
+- git diff --check: OK.
+- Prettier sobre todos los archivos modificados: OK.
+- pnpm test: OK, 74/74 unitarios y 78/78 de integración en la ejecución final.
+- Playwright: 11/11 pruebas seleccionadas aprobadas (auth-ui, shell, dashboard,
+  quotes). Cubren accesibilidad de login, estados de autenticación, ADMIN/STAFF,
+  sidebar contraído y persistencia, navegación móvil, presupuestos USD/ARS y
+  bloqueo de acceso STAFF a presupuestos/PDF.
+- Verificación adicional en navegador: login a 320, 390, 768, 1024 y 1440 px;
+  sin desbordamiento horizontal, imágenes Ferraro ni errores de recursos/JS.
+- Verificación adicional: ADMIN y STAFF en sidebar expandido/contraído y móvil;
+  sin desbordamiento horizontal. Cierre de sesión comprobado para ambos roles.
+- PDFs de muestra USD y ARS generados con firma PDF válida y metadatos PPF HOUSE.
+- GET https://ppfhouse.vercel.app/api/health: 200, {"status":"ok"}.
+  Confirma la salud de la conexión del despliegue existente, no publica cambios.
+
+Entorno de pruebas
+Las pruebas que crean o borran datos se ejecutaron exclusivamente en una nueva
+instancia local Prisma Dev/PGlite, con valores de conexión limitados al proceso.
+No se editaron archivos .env, esquema Prisma, dependencias ni migraciones.
+Se preparó el esquema en la base desechable mediante db push; al detectar que no
+incluye los CHECK SQL manuales, se restauró el CHECK salarial ya existente solo
+en esa base temporal. No se ejecutaron migraciones sobre Railway.
+La primera suite tuvo 74/74 unitarios y 75/78 de integración: dos errores 25001
+(SET TRANSACTION ISOLATION LEVEL must be called before any query) en borrado,
+y un fallo por ausencia del CHECK salarial en la base temporal. Este último
+se reprodujo con una copia del commit original. Los dos casos de borrado
+pasaron al ejecutarse por separado contra el commit original; no se atribuyen
+con certeza a esta adaptación y no se modificó su lógica.
+
+Referencias heredadas conservadas deliberadamente
+- public/brand/ferraro-*.svg: referencias técnicas históricas, sin uso activo.
+- docs/brand y documentación histórica: conservadas como antecedentes Ferraro.
+- package.json name=ferraro-manager: identificador técnico; sin cambios de deps.
+- ferraro:sidebar-collapsed y ferraro:sidebar-change: compatibilidad de preferencias.
+- ferraro_portal: cookie conservada para no alterar sesiones del portal.
+- prefijo ferraro_ de prepared statements: identificador interno sin efecto visual.
+- Fixtures, emails y datos de prueba históricos: no son identidad institucional.
+En src solo quedan referencias Ferraro en los identificadores técnicos anteriores.
+DetailHeader, funciones *Detail y Detailing son términos técnicos o del servicio,
+no referencias institucionales a Ferraro Detail.
+
+Pendientes con el cliente
+1. Adjuntar el escudo oficial (SVG o PNG de buena resolución) y las referencias
+   de composición si se desea reproducir su combinación con el nombre.
+2. Preparar entonces recursos transparentes oscuro/blanco, lockup y favicon,
+   y sustituir la identificación tipográfica provisional también en los PDFs.
+3. Confirmar ubicación y datos institucionales de PPF HOUSE.
+4. Validar visualmente la propuesta de interfaz; no es un manual oficial aprobado.
+5. Publicar los cambios cuando corresponda; el despliegue no se modificó.
+
+Archivos modificados
+- public/brand/manifest.json
+- src/app/(auth)/login/login.module.css
+- src/app/(auth)/login/page.tsx
+- src/app/(backoffice)/app/design-system/page.module.css
+- src/app/(backoffice)/app/design-system/page.tsx
+- src/app/(backoffice)/app/finance/categories/page.tsx
+- src/app/(backoffice)/app/page.tsx
+- src/app/(portal)/client/[token]/page.tsx
+- src/app/global-error.tsx
+- src/app/globals.css
+- src/app/layout.tsx
+- src/components/brand/brand-assets.tsx
+- src/components/brand/brand.module.css
+- src/components/patterns/app-shell.module.css
+- src/components/patterns/state-page.module.css
+- src/config/brand.ts
+- src/design-system/foundations.css
+- src/design-system/tokens.css
+- src/infrastructure/auth/server.ts
+- src/infrastructure/pdf/quote-document.tsx
+- src/modules/clients/ui/client-form.tsx
+- src/modules/clients/ui/client-vehicle-picker.module.css
+- src/modules/clients/ui/clients.module.css
+- src/modules/dashboard/ui/dashboard.module.css
+- src/modules/finance/ui/finance.module.css
+- src/modules/jobs/ui/jobs.module.css
+- src/modules/photos/ui/photo-gallery.module.css
+- src/modules/photos/ui/photo-uploader.module.css
+- src/modules/portal/ui/portal.module.css
+- src/modules/quotes/ui/quotes.module.css
+- src/modules/scheduling/ui/calendar.module.css
+- src/modules/scheduling/ui/schedule-picker.module.css
+- src/modules/search/ui/global-search-bar.tsx
+- src/modules/search/ui/search-results.module.css
+- tests/e2e/auth-ui.spec.ts
+- tests/e2e/dashboard.spec.ts
+- tests/e2e/portal.spec.ts
+- tests/e2e/shell.spec.ts
+
+Archivo creado
+- docs/ppfhouse-visual-validation.txt (este informe).

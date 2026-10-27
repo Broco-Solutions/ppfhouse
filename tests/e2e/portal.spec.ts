@@ -258,7 +258,7 @@ test("ADMIN shares an isolated portal and regeneration/revocation invalidate acc
   expect(portalResponse?.headers()["referrer-policy"]).toBe("no-referrer");
   expect(portalResponse?.headers()["x-robots-tag"]).toContain("noindex");
   await expect(
-    clientPage.getByRole("heading", { name: "Tu historial Ferraro." }),
+    clientPage.getByRole("heading", { name: "Tu historial PPF HOUSE." }),
   ).toBeVisible();
   await clientPage
     .getByRole("textbox", { name: "Contraseña" })

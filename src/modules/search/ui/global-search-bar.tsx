@@ -20,7 +20,7 @@ export function GlobalSearchBar() {
   return (
     <form action="/app/search" className={styles.form} role="search">
       <label className="sr-only" htmlFor="global-search">
-        Buscar en Ferraro
+        Buscar en PPF HOUSE
       </label>
       <div className={styles.control}>
         <MagnifyingGlassIcon

@@ -118,7 +118,7 @@ export function ClientForm({ values = {} }: { values?: ClientValues }) {
       </FormSection>
 
       <FormSection
-        description="Sólo visible para el equipo Ferraro."
+        description="Sólo visible para el equipo PPF HOUSE."
         title="Contexto interno"
       >
         <Field label="Notas internas" optional>

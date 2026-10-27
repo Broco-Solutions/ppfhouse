@@ -558,7 +558,7 @@
 }
 
 .weekDaySelected {
-  background: color-mix(in srgb, var(--brand-yellow) 5%, var(--surface));
+  background: color-mix(in srgb, var(--brand-blue) 5%, var(--surface));
 }
 
 .weekHeader {
@@ -1065,7 +1065,7 @@ a.weekEvent:hover {
 
 .choice:has(input:checked) {
   border-color: var(--focus-ring);
-  background: color-mix(in srgb, var(--brand-yellow) 8%, var(--surface));
+  background: color-mix(in srgb, var(--brand-blue) 8%, var(--surface));
 }
 
 .choice input {
@@ -1088,7 +1088,7 @@ a.weekEvent:hover {
 .identity {
   display: grid;
   gap: var(--space-1);
-  border-left: 1px solid var(--brand-yellow);
+  border-left: 1px solid var(--brand-blue);
   padding: var(--space-2) var(--space-4);
 }
 

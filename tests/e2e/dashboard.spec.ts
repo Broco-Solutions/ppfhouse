@@ -147,7 +147,7 @@ test("dashboard and search adapt their projections to ADMIN and STAFF", async ({
 }) => {
   await login(page, "admin");
   await expect(
-    page.getByRole("heading", { name: "¿Qué pasa hoy en Ferraro?" }),
+    page.getByRole("heading", { name: "¿Qué pasa hoy en PPF HOUSE?" }),
   ).toBeVisible();
   await expect(page).toHaveTitle(/Inicio/);
   await expect(page.getByText("Cobrado este mes")).toBeVisible();
@@ -156,7 +156,7 @@ test("dashboard and search adapt their projections to ADMIN and STAFF", async ({
     .analyze();
   expect(adminAxe.violations).toEqual([]);
   await page.keyboard.press("Control+k");
-  const adminSearch = page.getByLabel("Buscar en Ferraro");
+  const adminSearch = page.getByLabel("Buscar en PPF HOUSE");
   await expect(adminSearch).toBeFocused();
   await adminSearch.fill("M3");
   await adminSearch.press("Enter");
@@ -176,7 +176,7 @@ test("dashboard and search adapt their projections to ADMIN and STAFF", async ({
   const staffPage = await staffContext.newPage();
   await login(staffPage, "staff");
   await expect(
-    staffPage.getByRole("heading", { name: "¿Qué pasa hoy en Ferraro?" }),
+    staffPage.getByRole("heading", { name: "¿Qué pasa hoy en PPF HOUSE?" }),
   ).toBeVisible();
   await expect(staffPage).toHaveTitle(/Inicio/);
   await expect(staffPage.getByText("Cobrado este mes")).toHaveCount(0);
@@ -184,8 +184,8 @@ test("dashboard and search adapt their projections to ADMIN and STAFF", async ({
     .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
     .analyze();
   expect(staffAxe.violations).toEqual([]);
-  await staffPage.getByLabel("Buscar en Ferraro").fill("M3");
-  await staffPage.getByLabel("Buscar en Ferraro").press("Enter");
+  await staffPage.getByLabel("Buscar en PPF HOUSE").fill("M3");
+  await staffPage.getByLabel("Buscar en PPF HOUSE").press("Enter");
   await expect(
     staffPage.getByRole("link", {
       name: /BMW M3 Competition Martín M3 · 2026/,

@@ -9,9 +9,9 @@ import { ComponentShowcase } from "./showcase";
 export const metadata: Metadata = { title: "Sistema de diseño" };
 
 const brandColors = [
-  { label: "Negro", className: styles.black, value: "#000000" },
-  { label: "Gris", className: styles.gray, value: "#706F6F" },
-  { label: "Amarillo", className: styles.yellow, value: "#FFCE13" },
+  { label: "Grafito", className: styles.black, value: "#1F2329" },
+  { label: "Gris", className: styles.gray, value: "#6B7280" },
+  { label: "Azul", className: styles.blue, value: "#3D5AFE" },
   { label: "Blanco", className: styles.white, value: "#FFFFFF" },
 ] as const;
 
@@ -46,7 +46,7 @@ export default async function DesignSystemPage() {
       <header className={styles.hero}>
         <div className={styles.heroCopy}>
           <p className={styles.eyebrow}>Foundations · Sólo ADMIN</p>
-          <h1>Precisión operativa con identidad Ferraro</h1>
+          <h1>Precisión operativa con identidad PPF HOUSE</h1>
           <p>
             Tokens semánticos, tipografía y reglas de composición que priorizan
             legibilidad, jerarquía y velocidad de uso diario.
@@ -58,10 +58,11 @@ export default async function DesignSystemPage() {
       <section className={styles.section} aria-labelledby="brand-colors">
         <div className={styles.sectionHeader}>
           <p className={styles.label}>Marca</p>
-          <h2 id="brand-colors">Paleta oficial, uso controlado</h2>
+          <h2 id="brand-colors">Propuesta inicial de interfaz</h2>
           <p>
-            El amarillo identifica y acentúa; no reemplaza las señales
-            semánticas ni se usa como fondo para texto blanco.
+            Paleta propuesta para la aplicación, pendiente de validación con PPF
+            HOUSE; no constituye un manual de marca oficial. El azul acentúa
+            acciones y foco; los estados conservan sus colores semánticos.
           </p>
         </div>
         <div className={styles.swatches}>

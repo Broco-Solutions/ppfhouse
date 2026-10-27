@@ -96,7 +96,7 @@ export default async function AppHomePage() {
       <header className={styles.hero}>
         <div>
           <p className={styles.eyebrow}>{getBusinessDateKey(now)}</p>
-          <h1>¿Qué pasa hoy en Ferraro?</h1>
+          <h1>¿Qué pasa hoy en PPF HOUSE?</h1>
           <p className={styles.description}>
             {operational.todayAppointments.length
               ? `${operational.todayAppointments.length} turno(s) activo(s) en la jornada.`
@@ -105,7 +105,7 @@ export default async function AppHomePage() {
         </div>
         <span className={styles.location}>
           <span aria-hidden="true" className={styles.locationDot} />
-          Rosario · {formatBusinessDateTime(now)}
+          Argentina · {formatBusinessDateTime(now)}
         </span>
       </header>
 

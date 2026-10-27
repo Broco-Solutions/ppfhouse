@@ -84,7 +84,7 @@ export default async function FinancialCategoriesPage() {
       ) : (
         <section className="empty-state compact-empty">
           <h2>No hay categorías manuales.</h2>
-          <p>Creá sólo las que Ferraro use realmente.</p>
+          <p>Creá sólo las que PPF HOUSE use realmente.</p>
         </section>
       )}
     </div>

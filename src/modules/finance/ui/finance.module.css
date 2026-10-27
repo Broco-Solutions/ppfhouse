@@ -172,7 +172,7 @@
   width: 0.65rem;
   height: 0.65rem;
   content: "";
-  background: var(--brand-yellow);
+  background: var(--brand-blue);
   border: 2px solid var(--background);
   border-radius: 50%;
 }

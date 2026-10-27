@@ -132,7 +132,7 @@
 
 .primarySection {
   box-shadow:
-    inset 0 2px 0 var(--brand-yellow),
+    inset 0 2px 0 var(--brand-blue),
     var(--shadow-sm);
 }
 
@@ -356,7 +356,7 @@
   background: var(--surface-inverse);
   border-color: var(--surface-inverse);
   box-shadow:
-    inset 3px 0 0 var(--brand-yellow),
+    inset 3px 0 0 var(--brand-blue),
     var(--shadow-md);
 }
 

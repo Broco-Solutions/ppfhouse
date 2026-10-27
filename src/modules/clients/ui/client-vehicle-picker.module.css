@@ -110,11 +110,7 @@
 }
 
 .option[data-selected] {
-  background: color-mix(
-    in srgb,
-    var(--brand-yellow) 16%,
-    var(--surface-raised)
-  );
+  background: color-mix(in srgb, var(--brand-blue) 16%, var(--surface-raised));
 }
 
 .option > span {

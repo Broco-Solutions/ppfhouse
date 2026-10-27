@@ -64,8 +64,8 @@
   border-radius: var(--radius-pill);
 }
 .badges .public {
-  color: var(--brand-black);
-  background: var(--brand-yellow);
+  color: var(--on-primary);
+  background: var(--brand-blue);
 }
 .badges .private {
   color: var(--brand-white);

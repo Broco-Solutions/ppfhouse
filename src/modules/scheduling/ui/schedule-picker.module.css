@@ -87,7 +87,7 @@
   font-weight: var(--weight-regular);
 }
 
-/* Today: a brand-yellow underline mark, never a fill (fill means "selected"). */
+/* Today: a brand-accent underline mark, never a fill (fill means "selected"). */
 .calendarDay[aria-current="date"]::after {
   content: "";
   position: absolute;

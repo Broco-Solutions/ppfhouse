@@ -43,8 +43,8 @@
   }
 
   ::selection {
-    color: var(--brand-black);
-    background: var(--brand-yellow);
+    color: var(--on-primary);
+    background: var(--brand-blue);
   }
 }
 
