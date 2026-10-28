@@ -54,8 +54,13 @@ export function BrandLogo({
     <Image
       alt={decorative ? "" : brandConfig.shortName}
       aria-hidden={decorative || undefined}
-      className={cx(styles.asset, styles.logo, className)}
-      height={Math.round(width * 0.36)}
+      className={cx(
+        styles.asset,
+        styles.logo,
+        variant === "inverse" && styles.lightAsset,
+        className,
+      )}
+      height={Math.round((width * 136) / 996)}
       priority={priority}
       src={logoSources[variant]}
       width={width}
@@ -102,7 +107,7 @@ export function BrandMark({
       alt={decorative ? "" : brandConfig.shortName}
       aria-hidden={decorative || undefined}
       className={cx(styles.asset, styles.mark, className)}
-      height={size}
+      height={Math.round((size * 153) / 162)}
       priority={priority}
       src={markSources[variant]}
       width={size}
@@ -139,7 +144,7 @@ export function BrandLockup({
       alt={decorative ? "" : brandConfig.businessName}
       aria-hidden={decorative || undefined}
       className={cx(styles.asset, styles.lockup, className)}
-      height={Math.round(width * 0.43)}
+      height={Math.round((width * 136) / 996)}
       priority={priority}
       src={
         variant === "tricolor"

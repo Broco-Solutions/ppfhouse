@@ -1,6 +1,7 @@
 import {
   Document,
   Font,
+  Image as PdfImage,
   Page,
   StyleSheet,
   Text,
@@ -8,6 +9,7 @@ import {
   renderToBuffer,
 } from "@react-pdf/renderer";
 import path from "node:path";
+import { readFileSync } from "node:fs";
 
 import { brandConfig } from "@/config/brand";
 
@@ -41,11 +43,16 @@ export interface QuotePdfData {
   }[];
 }
 
+// Read the original PNG locally so PDFs never depend on an HTTP asset request.
+const horizontalLogo = readFileSync(
+  path.join(process.cwd(), "public/brand/logoPPF_nombre.png"),
+);
+
 const colors = {
-  ink: "#1F2329",
-  muted: "#6B7280",
-  accent: "#3D5AFE",
-  line: "#E5E7EB",
+  ink: "#252C31",
+  muted: "#59656C",
+  accent: "#4F6972",
+  line: "#DCE1E3",
   paper: "#FFFFFF",
 };
 
@@ -146,7 +153,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: "42%",
     left: "18%",
-    color: "#e5e7eb",
+    color: "#dce1e3",
     fontWeight: 700,
     fontSize: 64,
     letterSpacing: 8,
@@ -181,10 +188,10 @@ function QuoteDocument({
         <View style={styles.topRule} fixed />
         <View style={styles.header}>
           <View>
-            {/* Official shield pending; use only the institutional name. */}
-            <Text style={{ fontWeight: 700, fontSize: 20, letterSpacing: 1 }}>
-              {brandConfig.businessName}
-            </Text>
+            <PdfImage
+              src={horizontalLogo}
+              style={{ width: 192, height: (192 * 136) / 996 }}
+            />
           </View>
           <View style={styles.meta}>
             <Text>{data.number}</Text>

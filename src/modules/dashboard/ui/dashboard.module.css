@@ -22,7 +22,7 @@
 .hero h1 {
   max-width: 32ch;
   margin: 0 0 var(--space-1);
-  font-size: var(--text-2xl);
+  font-size: clamp(var(--text-2xl), 2vw, var(--text-3xl));
   line-height: var(--leading-tight);
   text-wrap: balance;
 }
@@ -132,7 +132,7 @@
 
 .primarySection {
   box-shadow:
-    inset 0 2px 0 var(--brand-blue),
+    inset 0 2px 0 var(--brand-petroleum),
     var(--shadow-sm);
 }
 
@@ -356,7 +356,7 @@
   background: var(--surface-inverse);
   border-color: var(--surface-inverse);
   box-shadow:
-    inset 3px 0 0 var(--brand-blue),
+    inset 3px 0 0 var(--brand-petroleum),
     var(--shadow-md);
 }
 

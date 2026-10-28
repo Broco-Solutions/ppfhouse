@@ -1,0 +1,135 @@
+PPF HOUSE — Adaptación premium (revisión final)
+Fecha: 28/10/2026
+Rama: visual/ppfhouse-premium
+Base: origin/main 247601ea27c6c3733aad3b4b6cd6580ac551d1f8
+Se ejecutó git fetch origin main antes de crear la rama y editar.
+Sin commit, push ni despliegue. No se accedió a Ferraro ni a Railway.
+
+RECURSOS AUTORIZADOS
+El usuario confirmó expresamente que los archivos encontrados son autorizados:
+- public/brand/logoPPF_transparente.png: escudo 162×153 con alfa.
+- public/brand/logoPPF_nombre.png: horizontal 996×136 con alfa, sin GRIDS.
+- docs/brand/a_clean_professional_ui_mockup_brand_styleboard.png: referencia visual.
+Se conservaron sus nombres originales. No se inventó ni redibujó ningún logo.
+El horizontal se integra en login, sidebar expandida y PDFs. El escudo se usa
+en sidebar contraída, encabezado móvil, favicon y superficies pequeñas.
+La variante clara del horizontal usa brightness(0) invert(1), conservando
+el alfa y la geometría del recurso. Las imágenes mantienen su proporción real.
+
+CAMBIOS
+- Paleta central: negro #151A1E, grafito #252C31, petróleo #4F6972,
+  acero #DCE1E3, humo #F5F6F6 y tarjetas #FFFFFF.
+- Se retiró el azul eléctrico institucional en src y en el manifiesto.
+  El token brand-blue se renombró brand-petroleum y se actualizaron sus usos.
+  Éxito, advertencia, error e información mantienen sus colores semánticos.
+- Login dividido conservado: jerarquía, ancho del formulario, controles de
+  46px, botón negro, superficies y luz discreta en el panel oscuro.
+  Se conserva el formulario, su estado y la lógica de autenticación.
+- Escudo real para favicon y sidebar contraída; altura proporcional 153/162.
+  La variante clara de sidebar usa brightness(0) invert(1), preservando alfa
+  y dibujo, sin generar ni modificar el archivo original.
+- Sidebar con mayor aire y selección petróleo; foco y campos compartidos
+  con bordes de mayor contraste. Dashboard: título con jerarquía responsive.
+- Ubicación central: Rosario, Santa Fe; país Argentina. Se muestra en login
+  de escritorio y pie del PDF. En móvil se conserva la composición compacta.
+- PDF: tintas grafito/petróleo/acero; cálculos, moneda, condiciones, tablas,
+  importes y contratos de emisión permanecen intactos. Se incrustan los bytes
+  del PNG original con @react-pdf/renderer, sin red ni URL externa.
+  Se verificó que el PNG se incluya en el tracing del build para las rutas PDF.
+- Sin cambios en dependencias, variables de entorno del repositorio, rutas,
+  autenticación, permisos, Prisma, migraciones ni lógica de negocio.
+
+COMPARACIÓN VISUAL
+Capturas reales en docs/brand/validation/before y after.
+Antes: copia temporal inalterada de origin/main; después: build local.
+Login y dashboard ADMIN/STAFF: 320, 390, 768, 1024 y 1440 px.
+Sidebar expandida: 1440; contraída: 1440; tablet compacta: 768/1024.
+Menú móvil ADMIN/STAFF capturado también a 390 px.
+Se revisaron las capturas, se ajustaron jerarquía, foco, aire y centrado del
+escudo y se repitieron las capturas. report.json registra overflow=false.
+Se ocultó únicamente el indicador de desarrollo Next en las capturas del antes.
+Los dashboards de esta base local vacía muestran ceros y estados vacíos reales;
+no se incorporaron estadísticas ficticias a la aplicación.
+Presupuestos: capturas de formulario/detalle a 390, 768, 820, 1024, 1280 y 1440.
+Frente a la referencia autorizada: se conserva la relación oscuro/claro,
+la sobriedad, tipografía limpia, contraste y superficies claras. Se usa la
+paleta petróleo solicitada por el usuario. No se reproduce la fotografía
+automotriz, el corte diagonal entre paneles ni la composición exacta de los
+logos del mockup. La fotografía se sustituye por luz y líneas CSS discretas.
+El logo proporcionado tiene una disposición mucho más ancha que el lockup
+apilado del login conceptual; se conserva el dibujo y su proporción original
+en lugar de reconstruirlo para igualar la imagen.
+
+VALIDACIÓN TÉCNICA
+pnpm db:generate: OK.
+pnpm lint: OK.
+pnpm typecheck: OK.
+pnpm test: OK, 74 unitarias y 78 de integración.
+pnpm build: OK.
+git diff --check: OK.
+Prettier en archivos modificados: OK.
+Playwright: 11/11 (auth-ui, shell, dashboard, quotes).
+Prueba PDF adicional: confirma /Subtype /Image para detectar omisión del logo.
+Incluye axe WCAG A/AA en login y presupuestos, visibilidad de contraseña,
+error/loading, permisos ADMIN/STAFF, menú móvil, enlaces sin JS,
+persistencia de sidebar, cotización ARS/USD, preview PDF, emisión y descarga
+inmutable del PDF, aceptación, conversión en turno y bloqueo de PDF a STAFF.
+Contrastes calculados: blanco/petróleo 5.84:1; texto secundario/humo 5.54:1;
+texto sutil/humo 4.85:1; borde de control/blanco 3.24:1.
+El PDF de preview real está en validation/quotes/quote-preview.pdf.
+Se rasterizó y se revisó también quote-preview.png; el texto extraído confirma
+PPF HOUSE · Rosario, Santa Fe, Argentina, subtotal USD 850.00, descuento
+USD 50.00 y total USD 800.00. Se conservaron las condiciones.
+Los logs finales se guardaron en validation/checks/.
+
+AISLAMIENTO
+La primera ejecución sobre Prisma Dev temporal falló por prepared statements
+compartidos del proxy PGlite al atender clientes concurrentes. Se descartó
+esa validación y se repitió con PostgreSQL 18 temporal en 127.0.0.1:5140.
+Se aplicaron las migraciones existentes únicamente a esa base nueva y vacía.
+Todas las pruebas finales y los navegadores usaron esa base aislada y usuarios
+de fixtures. No se cambiaron archivos .env ni se usaron datos productivos.
+Las bibliotecas de Chromium y PostgreSQL se extrajeron en /tmp para esta sesión;
+no se instalaron dependencias del proyecto ni bibliotecas visuales nuevas.
+
+ARCHIVOS MODIFICADOS
+public/brand/manifest.json
+src/app/(auth)/login/login.module.css
+src/app/(auth)/login/page.tsx
+src/app/(backoffice)/app/design-system/page.module.css
+src/app/(backoffice)/app/design-system/page.tsx
+src/app/globals.css
+src/components/brand/brand-assets.tsx
+src/components/brand/brand.module.css
+src/components/patterns/app-shell.module.css
+src/components/patterns/shell-frame.tsx
+src/components/patterns/state-page.module.css
+src/components/ui/primitives.module.css
+src/config/brand.ts
+src/design-system/foundations.css
+src/design-system/tokens.css
+src/infrastructure/pdf/quote-document.tsx
+src/modules/clients/ui/client-vehicle-picker.module.css
+src/modules/clients/ui/clients.module.css
+src/modules/dashboard/ui/dashboard.module.css
+src/modules/finance/ui/finance.module.css
+src/modules/identity/ui/login-form.module.css
+src/modules/jobs/ui/jobs.module.css
+src/modules/photos/ui/photo-gallery.module.css
+src/modules/photos/ui/photo-uploader.module.css
+src/modules/portal/ui/portal.module.css
+src/modules/quotes/ui/quotes.module.css
+src/modules/scheduling/ui/calendar.module.css
+src/modules/search/ui/search-results.module.css
+tests/unit/quote-pdf.test.ts
+
+RECURSOS ADICIONALES
+public/brand/logoPPF_transparente.png: recurso suministrado por el usuario,
+preexistente sin seguimiento Git; queda disponible en el árbol de trabajo.
+docs/brand/validation/: capturas y evidencia de pruebas de esta entrega.
+Este informe: docs/ppfhouse-premium-validation.txt.
+Los archivos originales del usuario, temporales y Zone.Identifier se conservaron.
+
+PENDIENTES
+Revisión visual del usuario antes de publicar. No se hizo commit, push ni
+despliegue. No hay archivos de identidad pendientes de autorización.

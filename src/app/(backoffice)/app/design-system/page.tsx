@@ -9,9 +9,9 @@ import { ComponentShowcase } from "./showcase";
 export const metadata: Metadata = { title: "Sistema de diseño" };
 
 const brandColors = [
-  { label: "Grafito", className: styles.black, value: "#1F2329" },
-  { label: "Gris", className: styles.gray, value: "#6B7280" },
-  { label: "Azul", className: styles.blue, value: "#3D5AFE" },
+  { label: "Negro profundo", className: styles.black, value: "#151A1E" },
+  { label: "Grafito", className: styles.gray, value: "#252C31" },
+  { label: "Petróleo", className: styles.petroleum, value: "#4F6972" },
   { label: "Blanco", className: styles.white, value: "#FFFFFF" },
 ] as const;
 
@@ -61,7 +61,7 @@ export default async function DesignSystemPage() {
           <h2 id="brand-colors">Propuesta inicial de interfaz</h2>
           <p>
             Paleta propuesta para la aplicación, pendiente de validación con PPF
-            HOUSE; no constituye un manual de marca oficial. El azul acentúa
+            HOUSE; no constituye un manual de marca oficial. El petróleo acentúa
             acciones y foco; los estados conservan sus colores semánticos.
           </p>
         </div>

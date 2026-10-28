@@ -132,7 +132,7 @@
   gap: var(--space-6);
   padding: var(--space-5);
   background: var(--surface-subtle);
-  border-left: 1px solid var(--brand-blue);
+  border-left: 1px solid var(--brand-petroleum);
 }
 .notes h2,
 .notes p {

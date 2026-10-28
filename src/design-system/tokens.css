@@ -1,47 +1,48 @@
 @layer tokens {
   :root {
     /* Initial PPF HOUSE interface proposal; not an official brand manual. */
-    --brand-black: #1f2329;
-    --brand-gray: #6b7280;
-    --brand-blue: #3d5afe;
+    --brand-black: #151a1e;
+    --brand-gray: #252c31;
+    --brand-steel: #dce1e3;
+    --brand-petroleum: #4f6972;
     --brand-white: #ffffff;
 
     /* Neutral surfaces and readable foregrounds. */
-    --background: #f8f9fb;
+    --background: #f5f6f6;
     --surface: #ffffff;
     --surface-raised: #ffffff;
-    --surface-subtle: #f3f4f6;
-    --surface-inverse: #0f1115;
-    --foreground: #1f2329;
-    --foreground-muted: #626975;
-    --foreground-subtle: #6b7280;
-    --foreground-inverse: #f8f9fb;
-    --border: #e5e7eb;
-    --border-strong: #c4c9d1;
-    --border-inverse: #3b414b;
+    --surface-subtle: #eef1f2;
+    --surface-inverse: #151a1e;
+    --foreground: #151a1e;
+    --foreground-muted: #59656c;
+    --foreground-subtle: #626e74;
+    --foreground-inverse: #f5f6f6;
+    --border: #dce1e3;
+    --border-strong: #849197;
+    --border-inverse: #414c52;
 
     /* Shell surfaces. */
-    --sidebar-background: #1f2329;
-    --sidebar-foreground: #f8f9fb;
-    --sidebar-muted: #b7bec9;
+    --sidebar-background: #151a1e;
+    --sidebar-foreground: #f5f6f6;
+    --sidebar-muted: #b6c1c6;
     --sidebar-foreground-muted: var(--sidebar-muted);
-    --sidebar-hover: #292f38;
-    --sidebar-active: #303846;
-    --sidebar-border: #353c46;
-    --sidebar-accent: var(--brand-blue);
+    --sidebar-hover: #252c31;
+    --sidebar-active: #35474e;
+    --sidebar-border: #354047;
+    --sidebar-accent: #a5bbc3;
 
     /* Interaction is independent from brand accent and semantic status. */
-    --primary: var(--brand-blue);
-    --primary-hover: #3048e8;
-    --primary-active: #263dcc;
+    --primary: var(--brand-petroleum);
+    --primary-hover: #405963;
+    --primary-active: #344b54;
     --on-primary: #ffffff;
     --secondary: #ffffff;
-    --secondary-hover: #f3f4f6;
-    --on-secondary: #1f2329;
-    --link: #3048e8;
-    --link-hover: #263dcc;
-    --focus-ring: #3d5afe;
-    --focus-accent: var(--brand-blue);
+    --secondary-hover: #eef1f2;
+    --on-secondary: #151a1e;
+    --link: #405963;
+    --link-hover: #344b54;
+    --focus-ring: #4f6972;
+    --focus-accent: var(--brand-petroleum);
 
     /* Semantic status colors remain independent of the brand palette. */
     --success: #21613d;
@@ -150,12 +151,12 @@
     --color-surface-raised: var(--surface-raised);
     --color-border: var(--border);
     --color-border-strong: var(--border-strong);
-    --color-accent: var(--brand-blue);
+    --color-accent: var(--brand-petroleum);
     --color-accent-strong: var(--link);
     --color-success: var(--success);
     --color-danger: var(--danger);
     --color-dark: var(--surface-inverse);
-    --color-dark-soft: #292f38;
+    --color-dark-soft: #252c31;
     --color-on-dark: var(--foreground-inverse);
   }
 

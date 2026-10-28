@@ -1,0 +1,77 @@
+[
+  {
+    "view": "login",
+    "width": 320,
+    "overflow": false
+  },
+  {
+    "view": "login",
+    "width": 390,
+    "overflow": false
+  },
+  {
+    "view": "login",
+    "width": 768,
+    "overflow": false
+  },
+  {
+    "view": "login",
+    "width": 1024,
+    "overflow": false
+  },
+  {
+    "view": "login",
+    "width": 1440,
+    "overflow": false
+  },
+  {
+    "view": "admin",
+    "width": 1440,
+    "overflow": false
+  },
+  {
+    "view": "admin",
+    "width": 1024,
+    "overflow": false
+  },
+  {
+    "view": "admin",
+    "width": 768,
+    "overflow": false
+  },
+  {
+    "view": "admin",
+    "width": 390,
+    "overflow": false
+  },
+  {
+    "view": "admin",
+    "width": 320,
+    "overflow": false
+  },
+  {
+    "view": "staff",
+    "width": 1440,
+    "overflow": false
+  },
+  {
+    "view": "staff",
+    "width": 1024,
+    "overflow": false
+  },
+  {
+    "view": "staff",
+    "width": 768,
+    "overflow": false
+  },
+  {
+    "view": "staff",
+    "width": 390,
+    "overflow": false
+  },
+  {
+    "view": "staff",
+    "width": 320,
+    "overflow": false
+  }
+]

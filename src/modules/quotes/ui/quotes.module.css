@@ -43,7 +43,7 @@
   overflow: hidden;
   background: var(--surface-raised);
   border: 1px solid var(--border);
-  border-top: 0.3rem solid var(--brand-blue);
+  border-top: 0.3rem solid var(--brand-petroleum);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
 }
@@ -162,7 +162,7 @@
   gap: var(--space-1);
   padding-bottom: var(--space-4);
   border-bottom: 2px solid
-    color-mix(in srgb, var(--brand-blue) 70%, transparent);
+    color-mix(in srgb, var(--brand-petroleum) 70%, transparent);
 }
 
 .summaryHeader > span {
@@ -200,9 +200,10 @@
 }
 
 .discountField input:focus-visible {
-  border-color: var(--brand-blue);
+  border-color: var(--brand-petroleum);
   outline: none;
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-blue) 35%, transparent);
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--brand-petroleum) 35%, transparent);
 }
 .summary small {
   color: var(--sidebar-foreground-muted);
@@ -227,7 +228,7 @@
   border-top: 1px solid var(--sidebar-border);
 }
 .summaryTotal strong {
-  color: var(--brand-blue);
+  color: var(--brand-petroleum);
   font-size: clamp(var(--text-xl), 3vw, var(--text-2xl));
   font-variant-numeric: tabular-nums;
   overflow-wrap: anywhere;

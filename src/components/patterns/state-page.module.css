@@ -23,7 +23,7 @@
   position: absolute;
   inset: 0 0 auto;
   height: 2px;
-  background: var(--brand-blue);
+  background: var(--brand-petroleum);
   content: "";
 }
 

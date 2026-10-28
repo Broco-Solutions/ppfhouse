@@ -64,7 +64,7 @@
 }
 .itemBody progress {
   width: 100%;
-  accent-color: var(--brand-blue);
+  accent-color: var(--brand-petroleum);
 }
 .done {
   color: var(--success);

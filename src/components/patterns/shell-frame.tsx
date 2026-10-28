@@ -329,9 +329,10 @@ export function ShellFrame({
       <div className={styles.mainColumn}>
         <header className={styles.mobileHeader}>
           <Link aria-label="Ir al inicio" href="/app">
-            <BrandLogo
+            <BrandMark
               className={styles.mobileBrand}
               decorative
+              size={32}
               variant="monochrome"
             />
           </Link>

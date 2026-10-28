@@ -37,7 +37,7 @@
   margin: clamp(var(--space-12), 14vh, 9rem) auto;
   padding: clamp(var(--space-6), 6vw, var(--space-10));
   background: var(--surface-raised);
-  border-top: 0.3rem solid var(--brand-blue);
+  border-top: 0.3rem solid var(--brand-petroleum);
   box-shadow: var(--shadow-sm);
 }
 .access h1 {
@@ -108,7 +108,7 @@
   padding: var(--space-5);
   background: var(--surface-inverse);
   color: var(--brand-white);
-  border-left: 1px solid var(--brand-blue);
+  border-left: 1px solid var(--brand-petroleum);
 }
 .vehicle h3,
 .vehicle p {

@@ -18,7 +18,7 @@
   min-width: 1.25rem;
 }
 
-/* Temporary text identification, pending the user-supplied official shield. */
+/* Fallback identification for brands configured without artwork. */
 .wordmark {
   display: block;
   max-width: 100%;
@@ -45,4 +45,9 @@
   font-family: var(--font-sans);
   font-weight: var(--weight-bold);
   line-height: 1.1;
+}
+
+/* Recolor only: preserve the supplied artwork geometry and alpha channel. */
+.lightAsset {
+  filter: brightness(0) invert(1);
 }

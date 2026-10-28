@@ -28,7 +28,7 @@
 }
 
 .eyebrow {
-  color: #91a3ff;
+  color: var(--sidebar-muted);
 }
 
 .hero h1 {
@@ -108,10 +108,10 @@
   border-color: var(--brand-gray);
 }
 
-.blue {
+.petroleum {
   color: var(--on-primary);
-  background: var(--brand-blue);
-  border-color: var(--brand-blue);
+  background: var(--brand-petroleum);
+  border-color: var(--brand-petroleum);
 }
 
 .white {

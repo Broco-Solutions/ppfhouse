@@ -5,6 +5,19 @@
 
 .submit {
   width: 100%;
+  min-height: 2.875rem;
+  background: var(--surface-inverse);
+  border-color: var(--surface-inverse);
+}
+
+.submit:hover:not(:disabled) {
+  background: var(--brand-gray);
+  border-color: var(--brand-gray);
+}
+
+.input {
+  min-height: 2.875rem;
+  font-size: var(--text-lg);
 }
 
 .input:-webkit-autofill,

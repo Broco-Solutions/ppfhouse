@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
-import { BrandLockup } from "@/components/brand/brand-assets";
+import { brandConfig } from "@/config/brand";
+
+import { BrandLockup, BrandLogo } from "@/components/brand/brand-assets";
 import { getOptionalSession } from "@/modules/identity/application/session";
 import { LoginForm } from "@/modules/identity/ui/login-form";
 
@@ -20,7 +22,12 @@ export default async function LoginPage() {
     <main className={styles.page}>
       <section className={styles.brandPanel} aria-label="PPF HOUSE">
         <div className={styles.brandPlate}>
-          <BrandLockup className={styles.lockup} priority />
+          <BrandLogo
+            className={styles.lockup}
+            variant="inverse"
+            width={256}
+            priority
+          />
         </div>
         <div className={styles.brandCopy}>
           <p className={styles.eyebrow}>Gestión interna · PPF HOUSE</p>
@@ -30,13 +37,15 @@ export default async function LoginPage() {
             hasta la entrega final.
           </p>
         </div>
-        <div className={styles.brandFooter}>PPF HOUSE · Argentina</div>
+        <div className={styles.brandFooter}>
+          {brandConfig.location} · {brandConfig.country}
+        </div>
       </section>
 
       <section className={styles.formPanel}>
         <div className={styles.formCard}>
           <div className={styles.mobileBrand}>
-            <BrandLockup className={styles.mobileLockup} priority />
+            <BrandLockup className={styles.mobileLockup} width={272} priority />
           </div>
           <div className={styles.formHeader}>
             <p className={styles.eyebrow}>Acceso interno</p>

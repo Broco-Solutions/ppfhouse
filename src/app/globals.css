@@ -3038,7 +3038,7 @@ a.nav-link:hover {
 .finance-inline-form select,
 .reverse-form input {
   min-height: var(--control-md);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-strong);
   border-radius: var(--radius-sm);
   background: var(--surface-raised);
   box-shadow: var(--shadow-sm);
@@ -3083,7 +3083,7 @@ a.nav-link:hover {
 ):focus-visible {
   border-color: var(--foreground-subtle);
   outline: none;
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus-accent) 45%, transparent);
+  box-shadow: 0 0 0 2px var(--focus-ring);
 }
 
 .field-group textarea,

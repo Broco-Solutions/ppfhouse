@@ -51,6 +51,7 @@ describe("quote PDF", () => {
       false,
     );
     expect(single.subarray(0, 4).toString()).toBe("%PDF");
+    expect(single.toString("latin1")).toContain("/Subtype /Image");
     expect(multiple.subarray(0, 4).toString()).toBe("%PDF");
     expect(multiple.length).toBeGreaterThan(single.length);
   });

@@ -65,7 +65,7 @@
 }
 .badges .public {
   color: var(--on-primary);
-  background: var(--brand-blue);
+  background: var(--brand-petroleum);
 }
 .badges .private {
   color: var(--brand-white);

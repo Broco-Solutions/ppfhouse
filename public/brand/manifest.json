@@ -1,22 +1,30 @@
 {
   "brand": "PPF HOUSE",
-  "status": "awaiting-official-shield-source",
+  "status": "user-authorized-artwork-integrated",
   "source": {
-    "path": null,
-    "provenance": "The user describes an official black shield with a geometric car front. No image file was available in this workspace or conversation.",
-    "license": "Awaiting the user-supplied official asset; no Ferraro artwork reused."
+    "path": "public/brand/logoPPF_transparente.png",
+    "provenance": "User-supplied transparent shield and horizontal logo, explicitly confirmed by the user. Original filenames retained.",
+    "license": "User-provided artwork for PPF HOUSE application.",
+    "horizontalPath": "public/brand/logoPPF_nombre.png",
+    "referencePath": "docs/brand/a_clean_professional_ui_mockup_brand_styleboard.png"
   },
-  "assets": {},
-  "temporaryIdentification": "Plain PPF HOUSE text in the existing Inter interface font; not an official logo. Favicon intentionally pending the official shield.",
+  "assets": {
+    "mark": "/brand/logoPPF_transparente.png",
+    "logo": "/brand/logoPPF_nombre.png",
+    "logoMonochrome": "/brand/logoPPF_nombre.png",
+    "logoInverse": "/brand/logoPPF_nombre.png",
+    "lockup": "/brand/logoPPF_nombre.png"
+  },
   "palette": {
-    "status": "Initial interface proposal, not an official brand manual",
-    "graphite": "#1F2329",
-    "black": "#0F1115",
-    "gray": "#6B7280",
-    "lightGray": "#E5E7EB",
-    "white": "#F8F9FB",
-    "accent": "#3D5AFE",
-    "hover": "#3048E8"
+    "status": "Interface proposal based on the requested premium palette",
+    "black": "#151A1E",
+    "graphite": "#252C31",
+    "accent": "#4F6972",
+    "lightGray": "#DCE1E3",
+    "smoke": "#F5F6F6",
+    "white": "#FFFFFF",
+    "hover": "#405963"
   },
-  "legacyAssets": "ferraro-*.svg retained only as unused historical technical references; derived from docs/brand/source/FERRARO_manual_marca.pdf and not authorized as PPF HOUSE artwork."
+  "legacyAssets": "ferraro-*.svg retained only as unused historical technical references; derived from docs/brand/source/FERRARO_manual_marca.pdf and not authorized as PPF HOUSE artwork.",
+  "inverseVariant": "CSS brightness(0) invert(1) maps artwork RGB to white while preserving its geometry, proportions and original alpha. PDFs embed the original PNG bytes locally."
 }

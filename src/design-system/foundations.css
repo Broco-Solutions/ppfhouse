@@ -44,7 +44,7 @@
 
   ::selection {
     color: var(--on-primary);
-    background: var(--brand-blue);
+    background: var(--brand-petroleum);
   }
 }
 

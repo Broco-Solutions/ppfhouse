@@ -297,7 +297,7 @@
   display: grid;
   grid-template-columns: minmax(10rem, 0.28fr) 1fr;
   gap: var(--space-6);
-  border-left: 1px solid var(--brand-blue);
+  border-left: 1px solid var(--brand-petroleum);
   padding: var(--space-4) var(--space-5);
   background: var(--surface);
 }

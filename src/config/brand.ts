@@ -2,17 +2,17 @@ export const brandConfig = {
   productName: "PPF HOUSE",
   businessName: "PPF HOUSE",
   shortName: "PPF HOUSE",
-  /** Text-only identification until the official shield source is supplied. */
+  /** Institutional name; artwork is supplied separately by the user. */
   mark: "PPF HOUSE",
-  location: "", // Awaiting PPF HOUSE location confirmation.
+  location: "Rosario, Santa Fe",
   country: "Argentina",
-  // Empty paths deliberately avoid displaying inherited or invented artwork.
+  // User-supplied artwork, confirmed for use in the application.
   assets: {
-    logo: "",
-    logoMonochrome: "",
-    logoInverse: "",
-    mark: "",
-    lockup: "",
+    logo: "/brand/logoPPF_nombre.png",
+    logoMonochrome: "/brand/logoPPF_nombre.png",
+    logoInverse: "/brand/logoPPF_nombre.png",
+    mark: "/brand/logoPPF_transparente.png",
+    lockup: "/brand/logoPPF_nombre.png",
     manifest: "/brand/manifest.json",
   },
   contact: {
@@ -26,10 +26,10 @@ export const brandConfig = {
       "Los valores se expresan en USD. La fecha de ejecución queda sujeta a disponibilidad de agenda.",
   },
   theme: {
-    brandAccentToken: "--brand-blue",
+    brandAccentToken: "--brand-petroleum",
     primaryToken: "--primary",
     surfaceToken: "--surface",
-    themeColor: "#0F1115",
+    themeColor: "#151A1E",
   },
 } as const;
 
